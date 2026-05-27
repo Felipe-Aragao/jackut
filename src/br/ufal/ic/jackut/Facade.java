@@ -7,6 +7,10 @@ import br.ufal.ic.jackut.service.UsuarioService;
 
 import java.io.File;
 
+/**
+ * Facade que expõe a API pública do sistema para uso em testes.
+ * Agrupa os serviços de usuário e sessão e delega operações a eles.
+ */
 public class Facade {
 
     private final UsuarioService usuarioService;
@@ -21,20 +25,45 @@ public class Facade {
 
     // Sistema
 
+    /**
+     * Zera o sistema removendo todos os usuários em memória e excluindo
+     * o arquivo de persistência.
+     */
     public void zerarSistema(){
         usuarioRepository.limpar();
         new File("data/usuario.xml").delete();
     }
 
+    /**
+     * Salva o estado atual do repositório de usuários no disco.
+     */
     public void encerrarSistema(){
         usuarioRepository.save();
     }
 
     // Usuario
-    public String  getAtributoUsuario(String login, String atributo) throws UsuarioNaoCadastradoException {
+    /**
+     * Retorna o valor de um atributo do usuário identificado por `login`.
+     *
+     * @param login login do usuário
+     * @param atributo o nome do atributo a ser buscado
+     * @return o valor do atributo
+     * @throws UsuarioNaoCadastradoException se o usuário não existir
+     */
+    public String getAtributoUsuario(String login, String atributo) throws UsuarioNaoCadastradoException {
         return usuarioService.getAtributoUsuario(login, atributo);
     }
 
+    /**
+     * Cria um usuário com `login`, `senha` e `nome`.
+     *
+     * @param login login desejado
+     * @param senha senha do usuário
+     * @param nome nome do usuário
+     * @throws ContaJaExisteException se já existir usuário com o mesmo login
+     * @throws SenhaInvalidaException se a senha for inválida
+     * @throws LoginInvalidoException se o login for inválido
+     */
     public void criarUsuario(String login, String senha, String nome)
             throws ContaJaExisteException, SenhaInvalidaException, LoginInvalidoException {
         usuarioService.criarUsuario(login, senha, nome);
@@ -42,6 +71,13 @@ public class Facade {
 
     //Sessão
 
+    /**
+     * Abre uma sessão para o usuário com `login` e `senha`.
+     *
+     * @param login login do usuário
+     * @param senha senha do usuário
+     * @throws LoginOuSenhaInvalidoException se o login ou senha estiverem inválidos
+     */
     public void abrirSessao(String login, String senha) throws LoginOuSenhaInvalidoException {
         sessaoService.abrirSessao(login, senha);
     }
