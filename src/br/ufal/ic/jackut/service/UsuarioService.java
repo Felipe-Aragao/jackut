@@ -1,11 +1,12 @@
 package br.ufal.ic.jackut.service;
 
-import br.ufal.ic.jackut.exception.ContaJaExisteException;
-import br.ufal.ic.jackut.exception.LoginInvalidoException;
-import br.ufal.ic.jackut.exception.SenhaInvalidaException;
-import br.ufal.ic.jackut.exception.UsuarioNaoCadastradoException;
+import br.ufal.ic.jackut.exception.*;
+import br.ufal.ic.jackut.model.Sessao;
 import br.ufal.ic.jackut.model.Usuario;
+import br.ufal.ic.jackut.repository.SessaoRepository;
 import br.ufal.ic.jackut.repository.UsuarioRepository;
+
+import java.util.Map;
 
 /**
  * Serviço para operações relacionadas a usuários: criação e leitura de atributos.
@@ -13,14 +14,17 @@ import br.ufal.ic.jackut.repository.UsuarioRepository;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final SessaoRepository sessaoRepository;
 
     /**
-     * Cria o serviço com o repositório de usuários fornecido.
+     * Cria o serviço com o repositório de usuários e sessões fornecido.
      *
      * @param usuarioRepository repositório de usuários
+     * @param sessaoRepository repositório de sessões
      */
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, SessaoRepository sessaoRepository) {
         this.usuarioRepository = usuarioRepository;
+        this.sessaoRepository = sessaoRepository;
     }
 
     /**
@@ -62,11 +66,44 @@ public class UsuarioService {
      * @return o valor do atributo ou null se inexistente
      * @throws UsuarioNaoCadastradoException se o usuário não existir
      */
-    public String getAtributoUsuario(String login, String atributo) throws UsuarioNaoCadastradoException {
+    public String getAtributoUsuario(String login, String atributo)
+            throws UsuarioNaoCadastradoException, AtributoNaoPreenchidoException {
         Usuario usuario = usuarioRepository.buscarUsuario(login);
 
         String valorAtributo = usuario.getAtributos().get(atributo);
 
+        if (valorAtributo == null) {
+            throw new AtributoNaoPreenchidoException();
+        }
+
         return valorAtributo;
+    }
+
+    /**
+     * Edita o valor de um atributo do usuário com base no id da sessão.
+     * @param id id da sessão
+     * @param atributo atributo que será editado
+     * @param valor novo valor do atributo
+     * @throws UsuarioNaoCadastradoException se não existir sessão
+     */
+
+    public void editarPerfil(String id, String atributo, String valor)
+            throws UsuarioNaoCadastradoException{
+
+        Sessao sessao = sessaoRepository.buscarSessao(id);
+
+        if (sessao == null) {
+            throw new UsuarioNaoCadastradoException();
+        }
+
+        Usuario usuario = sessao.getUsuario();
+
+        Map<String, String> atributos = usuario.getAtributos();
+
+        if (atributos.replace(atributo, valor) == null) {
+            atributos.put(atributo, valor);
+        }
+
+        usuario.setAtributos(atributos);
     }
 }
