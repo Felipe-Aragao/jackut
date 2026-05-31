@@ -1,7 +1,11 @@
 package br.ufal.ic.jackut.model;
 
+import br.ufal.ic.jackut.repository.UsuarioRepository;
+
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Modelo que representa um usuário do sistema.
@@ -13,6 +17,9 @@ public class Usuario {
     private String senha;
 
     private Map<String, String> atributos = new HashMap<>();
+
+    private Set<String> amigos = new LinkedHashSet<>();
+    private Set<String> convites = new LinkedHashSet<>();
 
     /**
      * Cria um usuário com login, senha e nome (armazenado em atributos).
@@ -65,5 +72,21 @@ public class Usuario {
      */
     public void setAtributos(Map<String, String> atributos) {
         this.atributos = atributos;
+    }
+
+    public Set<String> getAmigos() {
+        return new LinkedHashSet<>(amigos);
+    }
+
+    public void setAmigos(Set<String> amigos) {
+        this.amigos = new LinkedHashSet<>(amigos);
+    }
+
+    public Set<String> getConvites() {
+        return new LinkedHashSet<>(convites);
+    }
+
+    public void setConvites(Set<String> convites) {
+        this.convites = new LinkedHashSet<>(convites);
     }
 }

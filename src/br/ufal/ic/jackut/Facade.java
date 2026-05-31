@@ -90,8 +90,23 @@ public class Facade {
     }
 
     public void editarPerfil(String id, String atributo, String valor)
-            throws UsuarioNaoCadastradoException, AtributoNaoPreenchidoException {
+            throws UsuarioNaoCadastradoException {
         usuarioService.editarPerfil(id, atributo, valor);
+    }
+
+    public void adicionarAmigo(String id, String amigo)
+            throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoAmigoException,
+            EsperandoAceitacaoDoConviteException, UsuarioNaoPodeSiAutoAdicionarException {
+        usuarioService.adicionarAmigo(id, amigo);
+    }
+
+    public boolean ehAmigo(String login ,String amigo)
+            throws UsuarioNaoCadastradoException {
+        return usuarioService.ehAmigo(login, amigo);
+    }
+
+    public String getAmigos(String login) throws UsuarioNaoCadastradoException {
+        return usuarioService.getAmigos(login);
     }
 
 }

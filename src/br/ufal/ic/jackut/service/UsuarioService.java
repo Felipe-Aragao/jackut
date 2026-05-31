@@ -6,7 +6,7 @@ import br.ufal.ic.jackut.model.Usuario;
 import br.ufal.ic.jackut.repository.SessaoRepository;
 import br.ufal.ic.jackut.repository.UsuarioRepository;
 
-import java.util.Map;
+import java.util.*;
 
 /**
  * Serviço para operações relacionadas a usuários: criação e leitura de atributos.
@@ -105,5 +105,64 @@ public class UsuarioService {
         }
 
         usuario.setAtributos(atributos);
+    }
+
+    public void adicionarAmigo(String id, String amigo) throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoAmigoException, EsperandoAceitacaoDoConviteException, UsuarioNaoPodeSiAutoAdicionarException {
+
+        Sessao sessao = sessaoRepository.buscarSessao(id);
+
+        if (sessao == null) {
+            throw new UsuarioNaoCadastradoException();
+        }
+
+        Usuario usuario = sessao.getUsuario();
+        if (usuario.getLogin().equals(amigo)) {
+            throw new UsuarioNaoPodeSiAutoAdicionarException();
+        }
+
+        Usuario usuarioAlvo = usuarioRepository.buscarUsuario(amigo);
+
+        Set<String> amigos = usuario.getAmigos();
+        Set<String> convites = usuario.getConvites();
+
+        Set<String> amigosAlvo = usuarioAlvo.getAmigos();
+        Set<String> convitesAlvo = usuarioAlvo.getConvites();
+
+        if (amigos.contains(amigo) || amigosAlvo.contains(usuario.getLogin())) {
+            throw new UsuarioJaEstaAdicionadoComoAmigoException();
+        }
+
+        if (convites.contains(amigo)) {
+            amigos.add(amigo);
+            amigosAlvo.add(usuario.getLogin());
+            convites.remove(amigo);
+        } else {
+            if (convitesAlvo.contains(usuario.getLogin())) {
+                throw new EsperandoAceitacaoDoConviteException();
+            }
+            convitesAlvo.add(usuario.getLogin());
+        }
+
+        usuario.setAmigos(amigos);
+        usuario.setConvites(convites);
+        usuarioAlvo.setAmigos(amigosAlvo);
+        usuarioAlvo.setConvites(convitesAlvo);
+    }
+
+    public boolean ehAmigo(String login ,String amigo) throws UsuarioNaoCadastradoException {
+
+        Usuario usuario = usuarioRepository.buscarUsuario(login);
+
+        Set<String> amigos = usuario.getAmigos();
+
+        return amigos.contains(amigo);
+    }
+
+    public String getAmigos(String login) throws UsuarioNaoCadastradoException {
+        Usuario usuario = usuarioRepository.buscarUsuario(login);
+
+        Set<String> amigos = usuario.getAmigos();
+
+        return "{" + String.join(",", amigos) + "}";
     }
 }
