@@ -94,17 +94,44 @@ public class Facade {
         usuarioService.editarPerfil(id, atributo, valor);
     }
 
+    /**
+     * Envia um pedido de amizade do usuário identificado pela sessão `id`
+     * ao usuário `amigo`. O relacionamento só é efetivado quando o outro
+     * usuário adicionar de volta.
+     *
+     * @param id id da sessão do usuário que envia o pedido
+     * @param amigo login do usuário alvo do pedido
+     * @throws UsuarioNaoCadastradoException se a sessão for inválida
+     * @throws UsuarioJaEstaAdicionadoComoAmigoException se já são amigos
+     * @throws EsperandoAceitacaoDoConviteException se já existe um convite pendente
+     * @throws UsuarioNaoPodeSiAutoAdicionarException se o usuário tentar adicionar a si mesmo
+     */
     public void adicionarAmigo(String id, String amigo)
             throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoAmigoException,
             EsperandoAceitacaoDoConviteException, UsuarioNaoPodeSiAutoAdicionarException {
         usuarioService.adicionarAmigo(id, amigo);
     }
 
+    /**
+     * Verifica se `amigo` faz parte da lista de amigos de `login`.
+     *
+     * @param login login do usuário que consulta
+     * @param amigo login do possível amigo
+     * @return true se são amigos, false caso contrário
+     * @throws UsuarioNaoCadastradoException se o usuário do `login` não existir
+     */
     public boolean ehAmigo(String login ,String amigo)
             throws UsuarioNaoCadastradoException {
         return usuarioService.ehAmigo(login, amigo);
     }
 
+    /**
+     * Retorna a lista de amigos do usuário no formato {a,b,c}
+     *
+     * @param login login do usuário
+     * @return string contendo os amigos do usuário
+     * @throws UsuarioNaoCadastradoException se o usuário não existir
+     */
     public String getAmigos(String login) throws UsuarioNaoCadastradoException {
         return usuarioService.getAmigos(login);
     }

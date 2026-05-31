@@ -1,8 +1,6 @@
 package br.ufal.ic.jackut.repository;
 
-import br.ufal.ic.jackut.exception.UsuarioNaoCadastradoException;
 import br.ufal.ic.jackut.model.Sessao;
-import br.ufal.ic.jackut.model.Usuario;
 
 import java.util.HashMap;
 import java.util.Map;

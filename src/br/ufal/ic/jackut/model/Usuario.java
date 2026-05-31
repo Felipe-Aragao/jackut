@@ -1,7 +1,5 @@
 package br.ufal.ic.jackut.model;
 
-import br.ufal.ic.jackut.repository.UsuarioRepository;
-
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -74,18 +72,38 @@ public class Usuario {
         this.atributos = atributos;
     }
 
+    /**
+     * Retorna uma cópia da coleção de amigos
+     *
+     * @return cópia dos amigos
+     */
     public Set<String> getAmigos() {
         return new LinkedHashSet<>(amigos);
     }
 
+    /**
+     * Substitui a coleção de amigos.
+     *
+     * @param amigos nova coleção de amigos
+     */
     public void setAmigos(Set<String> amigos) {
         this.amigos = new LinkedHashSet<>(amigos);
     }
 
+    /**
+     * Retorna uma cópia dos convites recebidos
+     *
+     * @return cópia dos convites
+     */
     public Set<String> getConvites() {
         return new LinkedHashSet<>(convites);
     }
 
+    /**
+     * Substitui a coleção de convites
+     *
+     * @param convites nova coleção de convites
+     */
     public void setConvites(Set<String> convites) {
         this.convites = new LinkedHashSet<>(convites);
     }
