@@ -136,4 +136,13 @@ public class Facade {
         return usuarioService.getAmigos(login);
     }
 
+    public void enviarRecado(String id , String destinatario, String mensagem)
+            throws UsuarioNaoCadastradoException, UsuarioNaoPodeSiAutoEnviarMensagemException {
+        usuarioService.enviarRecado(id, destinatario, mensagem);
+    }
+
+    public String lerRecado(String id)
+            throws UsuarioNaoCadastradoException, NaoHaRecadosException {
+        return  usuarioService.lerRecado(id);
+    }
 }

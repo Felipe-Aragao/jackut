@@ -1,6 +1,7 @@
 package br.ufal.ic.jackut.service;
 
 import br.ufal.ic.jackut.exception.*;
+import br.ufal.ic.jackut.model.Recado;
 import br.ufal.ic.jackut.model.Sessao;
 import br.ufal.ic.jackut.model.Usuario;
 import br.ufal.ic.jackut.repository.SessaoRepository;
@@ -190,5 +191,52 @@ public class UsuarioService {
         Set<String> amigos = usuario.getAmigos();
 
         return "{" + String.join(",", amigos) + "}";
+    }
+
+    public void enviarRecado(String id , String destinatario, String mensagem)
+            throws UsuarioNaoCadastradoException, UsuarioNaoPodeSiAutoEnviarMensagemException {
+        Sessao sessao = sessaoRepository.buscarSessao(id);
+
+        if (sessao == null) {
+            throw new UsuarioNaoCadastradoException();
+        }
+
+        Usuario usuarioRemetente = sessao.getUsuario();
+        Usuario usuarioDestinatario = usuarioRepository.buscarUsuario(destinatario);
+
+        if (usuarioRemetente.getLogin().equals(destinatario)) {
+            throw new UsuarioNaoPodeSiAutoEnviarMensagemException();
+        }
+
+        Recado recado = new Recado(usuarioRemetente.getLogin(), usuarioDestinatario.getLogin(), mensagem);
+
+        List<Recado> recadosDestinatario = usuarioDestinatario.getRecados();
+        recadosDestinatario.add(recado);
+
+        usuarioDestinatario.setRecados(recadosDestinatario);
+    }
+
+    public String lerRecado(String id)
+            throws UsuarioNaoCadastradoException, NaoHaRecadosException {
+        Sessao sessao = sessaoRepository.buscarSessao(id);
+
+        if (sessao == null) {
+            throw new UsuarioNaoCadastradoException();
+        };
+
+        Usuario usuario = sessao.getUsuario();
+
+        List<Recado> recados = usuario.getRecados();
+
+        if (recados.isEmpty()) {
+            throw new NaoHaRecadosException();
+        }
+
+        String mensagem = recados.getFirst().getMensagem();
+
+        recados.removeFirst();
+        usuario.setRecados(recados);
+
+        return mensagem;
     }
 }
