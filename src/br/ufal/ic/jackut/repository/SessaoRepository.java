@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Repositório responsável por persistir e recuperar instâncias de `Sessao`.
+ * Repositório responsável por manter e recuperar instâncias de `Sessao` em memória.
  */
 
 public class SessaoRepository {
     private final Map<String, Sessao> sessoes;
 
+    /**
+     * Inicializa o repositório de sessões vazio.
+     */
     public SessaoRepository() {
         this.sessoes = new HashMap<>();
     }
@@ -33,5 +36,12 @@ public class SessaoRepository {
      */
     public Sessao buscarSessao(String id) {
         return sessoes.get(id);
+    }
+
+    /**
+     * Remove todas as sessões mantidas em memória.
+     */
+    public void limpar() {
+        sessoes.clear();
     }
 }

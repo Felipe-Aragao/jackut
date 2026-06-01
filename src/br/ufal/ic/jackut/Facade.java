@@ -3,10 +3,10 @@ package br.ufal.ic.jackut;
 import br.ufal.ic.jackut.exception.*;
 import br.ufal.ic.jackut.repository.SessaoRepository;
 import br.ufal.ic.jackut.repository.UsuarioRepository;
+import br.ufal.ic.jackut.service.AmizadeService;
+import br.ufal.ic.jackut.service.RecadoService;
 import br.ufal.ic.jackut.service.SessaoService;
 import br.ufal.ic.jackut.service.UsuarioService;
-
-import java.io.File;
 
 /**
  * Facade que expõe a API pública do sistema para uso em testes.
@@ -16,14 +16,21 @@ public class Facade {
 
     private final UsuarioService usuarioService;
     private final SessaoService sessaoService;
+    private final AmizadeService amizadeService;
+    private final RecadoService recadoService;
     UsuarioRepository usuarioRepository;
     SessaoRepository sessaoRepository;
 
+    /**
+     * Inicializa a fachada com os repositórios e serviços usados pelo sistema.
+     */
     public Facade() {
         this.usuarioRepository = new UsuarioRepository();
         this.sessaoRepository = new SessaoRepository();
         this.usuarioService = new UsuarioService(usuarioRepository, sessaoRepository);
         this.sessaoService = new SessaoService(usuarioRepository, sessaoRepository);
+        this.amizadeService = new AmizadeService(usuarioRepository, sessaoRepository);
+        this.recadoService = new RecadoService(usuarioRepository, sessaoRepository);
     }
 
     // Sistema
@@ -34,7 +41,8 @@ public class Facade {
      */
     public void zerarSistema(){
         usuarioRepository.limpar();
-        new File("data/usuario.xml").delete();
+        usuarioRepository.apagarPersistencia();
+        sessaoRepository.limpar();
     }
 
     /**
@@ -89,6 +97,14 @@ public class Facade {
         return sessaoService.abrirSessao(login, senha);
     }
 
+    /**
+     * Edita um atributo do perfil do usuário associado à sessão informada.
+     *
+     * @param id id da sessão do usuário
+     * @param atributo atributo que será criado ou alterado
+     * @param valor novo valor do atributo
+     * @throws UsuarioNaoCadastradoException se a sessão não existir
+     */
     public void editarPerfil(String id, String atributo, String valor)
             throws UsuarioNaoCadastradoException {
         usuarioService.editarPerfil(id, atributo, valor);
@@ -109,7 +125,7 @@ public class Facade {
     public void adicionarAmigo(String id, String amigo)
             throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoAmigoException,
             EsperandoAceitacaoDoConviteException, UsuarioNaoPodeSeAutoAdicionarException {
-        usuarioService.adicionarAmigo(id, amigo);
+        amizadeService.adicionarAmigo(id, amigo);
     }
 
     /**
@@ -122,7 +138,7 @@ public class Facade {
      */
     public boolean ehAmigo(String login ,String amigo)
             throws UsuarioNaoCadastradoException {
-        return usuarioService.ehAmigo(login, amigo);
+        return amizadeService.ehAmigo(login, amigo);
     }
 
     /**
@@ -133,7 +149,7 @@ public class Facade {
      * @throws UsuarioNaoCadastradoException se o usuário não existir
      */
     public String getAmigos(String login) throws UsuarioNaoCadastradoException {
-        return usuarioService.getAmigos(login);
+        return amizadeService.getAmigos(login);
     }
 
     /**
@@ -146,7 +162,7 @@ public class Facade {
      */
     public void enviarRecado(String id , String destinatario, String mensagem)
             throws UsuarioNaoCadastradoException, UsuarioNaoPodeSeAutoEnviarMensagemException {
-        usuarioService.enviarRecado(id, destinatario, mensagem);
+        recadoService.enviarRecado(id, destinatario, mensagem);
     }
 
     /**
@@ -158,6 +174,6 @@ public class Facade {
      */
     public String lerRecado(String id)
             throws UsuarioNaoCadastradoException, NaoHaRecadosException {
-        return  usuarioService.lerRecado(id);
+        return  recadoService.lerRecado(id);
     }
 }
