@@ -15,7 +15,7 @@ public class Usuario {
 
     private Set<String> amigos = new LinkedHashSet<>();
     private Set<String> convites = new LinkedHashSet<>();
-
+    
     private List<Recado> recados = new ArrayList<>();
 
     /**
@@ -107,10 +107,18 @@ public class Usuario {
         this.convites = new LinkedHashSet<>(convites);
     }
 
+    /**
+     * Retorna uma cópia da lista de recados do usuário.
+     * @return lista de recados (cópia)
+     */
     public List<Recado> getRecados() {
         return new ArrayList<>(recados);
     }
 
+    /**
+     * Substitui a lista de recados do usuário.
+     * @param recados nova lista de recados
+     */
     public void setRecados(List<Recado> recados) {
         this.recados = recados;
     }

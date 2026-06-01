@@ -104,11 +104,11 @@ public class Facade {
      * @throws UsuarioNaoCadastradoException se a sessão for inválida
      * @throws UsuarioJaEstaAdicionadoComoAmigoException se já são amigos
      * @throws EsperandoAceitacaoDoConviteException se já existe um convite pendente
-     * @throws UsuarioNaoPodeSiAutoAdicionarException se o usuário tentar adicionar a si mesmo
+     * @throws UsuarioNaoPodeSeAutoAdicionarException se o usuário tentar adicionar a si mesmo
      */
     public void adicionarAmigo(String id, String amigo)
             throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoAmigoException,
-            EsperandoAceitacaoDoConviteException, UsuarioNaoPodeSiAutoAdicionarException {
+            EsperandoAceitacaoDoConviteException, UsuarioNaoPodeSeAutoAdicionarException {
         usuarioService.adicionarAmigo(id, amigo);
     }
 
@@ -136,11 +136,26 @@ public class Facade {
         return usuarioService.getAmigos(login);
     }
 
+    /**
+     * Encaminha um recado a partir da sessão `id` para `destinatario`.
+     * @param id id da sessão do remetente
+     * @param destinatario login do destinatário
+     * @param mensagem texto do recado
+     * @throws UsuarioNaoCadastradoException se a sessão for inválida
+     * @throws UsuarioNaoPodeSeAutoEnviarMensagemException se tentar enviar recado para si
+     */
     public void enviarRecado(String id , String destinatario, String mensagem)
-            throws UsuarioNaoCadastradoException, UsuarioNaoPodeSiAutoEnviarMensagemException {
+            throws UsuarioNaoCadastradoException, UsuarioNaoPodeSeAutoEnviarMensagemException {
         usuarioService.enviarRecado(id, destinatario, mensagem);
     }
 
+    /**
+     * Lê o recado mais antigo recebido pelo usuário associado à sessão `id`.
+     * @param id id da sessão do usuário
+     * @return texto do recado lido
+     * @throws UsuarioNaoCadastradoException se a sessão for inválida
+     * @throws NaoHaRecadosException se não houver recados a serem lidos
+     */
     public String lerRecado(String id)
             throws UsuarioNaoCadastradoException, NaoHaRecadosException {
         return  usuarioService.lerRecado(id);

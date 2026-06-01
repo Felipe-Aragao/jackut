@@ -118,9 +118,11 @@ public class UsuarioService {
      * @throws UsuarioNaoCadastradoException se a sessão for inválida
      * @throws UsuarioJaEstaAdicionadoComoAmigoException se já são amigos
      * @throws EsperandoAceitacaoDoConviteException se já existe um convite pendente
-     * @throws UsuarioNaoPodeSiAutoAdicionarException se o usuário tentar adicionar a si mesmo
+     * @throws UsuarioNaoPodeSeAutoAdicionarException se o usuário tentar adicionar a si
      */
-    public void adicionarAmigo(String id, String amigo) throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoAmigoException, EsperandoAceitacaoDoConviteException, UsuarioNaoPodeSiAutoAdicionarException {
+    public void adicionarAmigo(String id, String amigo)
+            throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoAmigoException,
+            EsperandoAceitacaoDoConviteException, UsuarioNaoPodeSeAutoAdicionarException {
 
         Sessao sessao = sessaoRepository.buscarSessao(id);
 
@@ -130,7 +132,7 @@ public class UsuarioService {
 
         Usuario usuario = sessao.getUsuario();
         if (usuario.getLogin().equals(amigo)) {
-            throw new UsuarioNaoPodeSiAutoAdicionarException();
+            throw new UsuarioNaoPodeSeAutoAdicionarException();
         }
 
         Usuario usuarioAlvo = usuarioRepository.buscarUsuario(amigo);
@@ -193,8 +195,18 @@ public class UsuarioService {
         return "{" + String.join(",", amigos) + "}";
     }
 
-    public void enviarRecado(String id , String destinatario, String mensagem)
-            throws UsuarioNaoCadastradoException, UsuarioNaoPodeSiAutoEnviarMensagemException {
+        /**
+         * Envia um recado a partir da sessão identificada por `id` para o
+         * usuário `destinatario` com o texto `mensagem`.
+         *
+         * @param id id da sessão do usuário remetente
+         * @param destinatario login do usuário destinatário
+         * @param mensagem texto do recado
+         * @throws UsuarioNaoCadastradoException se a sessão não existir
+         * @throws UsuarioNaoPodeSeAutoEnviarMensagemException se o remetente for o mesmo do destinatário
+         */
+        public void enviarRecado(String id , String destinatario, String mensagem)
+            throws UsuarioNaoCadastradoException, UsuarioNaoPodeSeAutoEnviarMensagemException {
         Sessao sessao = sessaoRepository.buscarSessao(id);
 
         if (sessao == null) {
@@ -205,7 +217,7 @@ public class UsuarioService {
         Usuario usuarioDestinatario = usuarioRepository.buscarUsuario(destinatario);
 
         if (usuarioRemetente.getLogin().equals(destinatario)) {
-            throw new UsuarioNaoPodeSiAutoEnviarMensagemException();
+            throw new UsuarioNaoPodeSeAutoEnviarMensagemException();
         }
 
         Recado recado = new Recado(usuarioRemetente.getLogin(), usuarioDestinatario.getLogin(), mensagem);
@@ -216,13 +228,22 @@ public class UsuarioService {
         usuarioDestinatario.setRecados(recadosDestinatario);
     }
 
-    public String lerRecado(String id)
+        /**
+         * Lê o recado mais antigo da fila de recados do usuário
+         * associado à sessão `id`.
+         *
+         * @param id id da sessão do usuário
+         * @return o texto do recado lido
+         * @throws UsuarioNaoCadastradoException se a sessão não existir
+         * @throws NaoHaRecadosException se não existirem recados para o usuário
+         */
+        public String lerRecado(String id)
             throws UsuarioNaoCadastradoException, NaoHaRecadosException {
         Sessao sessao = sessaoRepository.buscarSessao(id);
 
         if (sessao == null) {
             throw new UsuarioNaoCadastradoException();
-        };
+        }
 
         Usuario usuario = sessao.getUsuario();
 
