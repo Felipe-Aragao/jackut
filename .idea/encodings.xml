@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/Main.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/AtributoNaoPreenchidoException.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/ContaJaExisteException.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/EsperandoAceitacaoDoConviteException.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/LoginInvalidoException.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/LoginOuSenhaInvalidoException.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/NaoHaRecadosException.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/SenhaInvalidaException.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/UsuarioJaEstaAdicionadoComoAmigoException.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/UsuarioNaoCadastradoException.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/UsuarioNaoPodeSeAutoAdicionarException.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/br/ufal/ic/jackut/exception/UsuarioNaoPodeSeAutoEnviarMensagemException.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/tests/us1_1.txt" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/tests/us1_2.txt" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/tests/us2_1.txt" charset="ISO-8859-1" />
@@ -9,5 +22,6 @@
     <file url="file://$PROJECT_DIR$/tests/us3_2.txt" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/tests/us4_1.txt" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/tests/us4_2.txt" charset="ISO-8859-1" />
+    <file url="PROJECT" charset="ISO-8859-1" />
   </component>
 </project>

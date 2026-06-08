@@ -1,13 +1,13 @@
 package br.ufal.ic.jackut.exception;
 
 /**
- * ExceÃ§Ã£o lanÃ§ada quando se tenta criar uma conta cujo login jÃ¡ existe.
+ * Exceção lançada quando se tenta criar uma conta cujo login já existe.
  */
 public class ContaJaExisteException extends Exception {
     /**
-     * Cria a exceÃ§Ã£o com mensagem "Conta com esse nome jï¿½ existe.".
+     * Cria a exceção com mensagem "Conta com esse nome já existe.".
      */
     public ContaJaExisteException() {
-        super("Conta com esse nome jï¿½ existe.");
+        super("Conta com esse nome já existe.");
     }
 }

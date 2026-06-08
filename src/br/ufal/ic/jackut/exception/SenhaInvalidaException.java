@@ -1,13 +1,13 @@
 package br.ufal.ic.jackut.exception;
 
 /**
- * ExceÃ§Ã£o lanÃ§ada quando uma senha fornecida Ã© invÃ¡lida (nula ou vazia).
+ * Exceção lançada quando uma senha fornecida é inválida (nula ou vazia).
  */
 public class SenhaInvalidaException extends Exception {
     /**
-     * Cria a exceÃ§Ã£o com a mensagem "Senha invï¿½lida.".
+     * Cria a exceção com a mensagem "Senha inválida.".
      */
     public SenhaInvalidaException() {
-        super("Senha invï¿½lida.");
+        super("Senha inválida.");
     }
 }

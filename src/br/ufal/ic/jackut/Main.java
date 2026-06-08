@@ -3,8 +3,8 @@ package br.ufal.ic.jackut;
 import easyaccept.EasyAccept;
 
 /**
- * Entrada da aplica√ß√£o usada para executar os casos de teste do EasyAccept.
- * Os arquivos de teste est√£o localizados na pasta `tests`.
+ * Entrada da aplicaÁ„o usada para executar os casos de teste do EasyAccept.
+ * Os arquivos de teste est„o localizados na pasta `tests`.
  */
 public class Main {
     /**

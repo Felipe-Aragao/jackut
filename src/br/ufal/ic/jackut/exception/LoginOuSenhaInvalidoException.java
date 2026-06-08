@@ -1,14 +1,14 @@
 package br.ufal.ic.jackut.exception;
 
 /**
- * ExceÃ§Ã£o lanÃ§ada quando login e/ou senha Ã© invÃ¡lido ou nÃ£o confere com
+ * Exceção lançada quando login e/ou senha é inválido ou não confere com
  * os dados cadastrados.
  */
 public class LoginOuSenhaInvalidoException extends Exception{
     /**
-     * Cria a exceÃ§Ã£o com a mensagem "Login ou senha invï¿½lidos."".
+     * Cria a exceção com a mensagem "Login ou senha inválidos."".
      */
     public LoginOuSenhaInvalidoException() {
-        super("Login ou senha invï¿½lidos.");
+        super("Login ou senha inválidos.");
     }
 }

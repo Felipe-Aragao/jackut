@@ -1,13 +1,13 @@
 package br.ufal.ic.jackut.exception;
 
 /**
- * ExceÃ§Ã£o lanÃ§ada quando nÃ£o se encontra um usuÃ¡rio no sistema.
+ * Exceção lançada quando não se encontra um usuário no sistema.
  */
 public class UsuarioNaoCadastradoException extends Exception{
     /**
-     * Cria a exceÃ§Ã£o com a mensagem "Usuï¿½rio nï¿½o cadastrado.".
+     * Cria a exceção com a mensagem "Usuário não cadastrado.".
      */
     public UsuarioNaoCadastradoException() {
-        super("Usuï¿½rio nï¿½o cadastrado.");
+        super("Usuário não cadastrado.");
     }
 }

@@ -1,13 +1,13 @@
 package br.ufal.ic.jackut.exception;
 
 /**
- * ExceÃ§Ã£o lanÃ§ada quando nÃ£o existem recados para o usuÃ¡rio.
+ * Exceção lançada quando não existem recados para o usuário.
  */
 public class NaoHaRecadosException extends Exception {
     /**
-     * Cria a exceÃ§Ã£o com a mensagem "Nï¿½o hï¿½ recados.".
+     * Cria a exceção com a mensagem "Não há recados.".
      */
     public NaoHaRecadosException() {
-        super("Nï¿½o hï¿½ recados.");
+        super("Não há recados.");
     }
 }

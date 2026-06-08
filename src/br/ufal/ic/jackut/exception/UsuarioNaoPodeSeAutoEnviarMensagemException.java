@@ -1,13 +1,13 @@
 package br.ufal.ic.jackut.exception;
 
 /**
- * ExceÃ§Ã£o lanÃ§ada quando um usuÃ¡rio tenta enviar um recado para si prÃ³prio.
+ * Exceção lançada quando um usuário tenta enviar um recado para si próprio.
  */
 public class UsuarioNaoPodeSeAutoEnviarMensagemException extends Exception {
     /**
-     * Cria a exceÃ§Ã£o com a mensagem "Usuï¿½rio nï¿½o pode enviar recado para si mesmo.".
+     * Cria a exceção com a mensagem "Usuário não pode enviar recado para si mesmo.".
      */
     public UsuarioNaoPodeSeAutoEnviarMensagemException() {
-        super("Usuï¿½rio nï¿½o pode enviar recado para si mesmo.");
+        super("Usuário não pode enviar recado para si mesmo.");
     }
 }

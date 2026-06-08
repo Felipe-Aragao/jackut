@@ -1,13 +1,13 @@
 package br.ufal.ic.jackut.exception;
 
 /**
- * ExceÃ§Ã£o lanÃ§ada quando um login fornecido Ã© invÃ¡lido (nulo ou vazio).
+ * Exceção lançada quando um login fornecido é inválido (nulo ou vazio).
  */
 public class LoginInvalidoException extends Exception {
     /**
-     * Cria a exceÃ§Ã£o com a mensagem "Login invï¿½lido..".
+     * Cria a exceção com a mensagem "Login inválido.".
      */
     public LoginInvalidoException() {
-        super("Login invï¿½lido.");
+        super("Login inválido.");
     }
 }

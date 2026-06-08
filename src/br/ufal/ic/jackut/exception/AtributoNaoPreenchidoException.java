@@ -1,13 +1,13 @@
 package br.ufal.ic.jackut.exception;
 
 /**
- * ExceÃ§Ã£o lanÃ§ada quando um atributo nÃ£o estÃ¡ preenchido.
+ * Exceção lançada quando um atributo não está preenchido.
  */
 public class AtributoNaoPreenchidoException extends Exception {
     /**
-     * Cria a exceÃ§Ã£o com a mensagem "Atributo nï¿½o preenchido.".
+     * Cria a exceção com a mensagem "Atributo não preenchido.".
      */
     public AtributoNaoPreenchidoException() {
-        super("Atributo nï¿½o preenchido.");
+        super("Atributo não preenchido.");
     }
 }
