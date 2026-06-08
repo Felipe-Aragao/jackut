@@ -4,6 +4,8 @@
 
 Projeto da disciplina Programação 2 (COMP372) 2026.1 - UFAL desenvolvido em Java.
 
+[DOCUMENTAÇÃO](https://felipe-aragao.github.io/jackut/)
+
 ## Estrutura
 
 ```text
