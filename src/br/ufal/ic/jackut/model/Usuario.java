@@ -3,8 +3,8 @@ package br.ufal.ic.jackut.model;
 import java.util.*;
 
 /**
- * Modelo que representa um usuÃ¡rio do sistema.
- * ContÃ©m `login`, `senha` e um mapa de atributos adicionais.
+ * Modelo que representa um usuário do sistema.
+ * Contém `login`, `senha` e um mapa de atributos adicionais.
  */
 public class Usuario {
 
@@ -19,11 +19,11 @@ public class Usuario {
     private List<Recado> recados = new ArrayList<>();
 
     /**
-     * Cria um usuÃ¡rio com login, senha e nome (armazenado em atributos).
+     * Cria um usuário com login, senha e nome (armazenado em atributos).
      *
-     * @param login login do usuÃ¡rio
-     * @param senha senha do usuÃ¡rio
-     * @param nome  nome do usuÃ¡rio
+     * @param login login do usuário
+     * @param senha senha do usuário
+     * @param nome  nome do usuário
      */
     public Usuario(String login, String senha, String nome) {
         this.login = login;
@@ -33,7 +33,7 @@ public class Usuario {
     }
 
     /**
-     * Construtor vazio necessÃ¡rio para serializaÃ§Ã£o XML.
+     * Construtor vazio necessário para serialização XML.
      */
     public Usuario(){}
 
@@ -54,16 +54,16 @@ public class Usuario {
     }
 
     /**
-     * Retorna uma cÃ³pia do mapa de atributos do usuÃ¡rio.
+     * Retorna uma cópia do mapa de atributos do usuário.
      *
-     * @return cÃ³pia do mapa de atributos
+     * @return cópia do mapa de atributos
      */
     public Map<String, String> getAtributos() {
         return new HashMap<>(atributos);
     }
 
     /**
-     * Substitui o mapa de atributos do usuÃ¡rio.
+     * Substitui o mapa de atributos do usuário.
      *
      * @param atributos novo mapa de atributos
      */
@@ -72,51 +72,51 @@ public class Usuario {
     }
 
     /**
-     * Retorna uma cÃ³pia da coleÃ§Ã£o de amigos
+     * Retorna uma cópia da coleção de amigos
      *
-     * @return cÃ³pia dos amigos
+     * @return cópia dos amigos
      */
     public Set<String> getAmigos() {
         return new LinkedHashSet<>(amigos);
     }
 
     /**
-     * Substitui a coleÃ§Ã£o de amigos.
+     * Substitui a coleção de amigos.
      *
-     * @param amigos nova coleÃ§Ã£o de amigos
+     * @param amigos nova coleção de amigos
      */
     public void setAmigos(Set<String> amigos) {
         this.amigos = new LinkedHashSet<>(amigos);
     }
 
     /**
-     * Retorna uma cÃ³pia dos convites recebidos
+     * Retorna uma cópia dos convites recebidos
      *
-     * @return cÃ³pia dos convites
+     * @return cópia dos convites
      */
     public Set<String> getConvites() {
         return new LinkedHashSet<>(convites);
     }
 
     /**
-     * Substitui a coleÃ§Ã£o de convites
+     * Substitui a coleção de convites
      *
-     * @param convites nova coleÃ§Ã£o de convites
+     * @param convites nova coleção de convites
      */
     public void setConvites(Set<String> convites) {
         this.convites = new LinkedHashSet<>(convites);
     }
 
     /**
-     * Retorna uma cÃ³pia da lista de recados do usuÃ¡rio.
-     * @return lista de recados (cÃ³pia)
+     * Retorna uma cópia da lista de recados do usuário.
+     * @return lista de recados (cópia)
      */
     public List<Recado> getRecados() {
         return new ArrayList<>(recados);
     }
 
     /**
-     * Substitui a lista de recados do usuÃ¡rio.
+     * Substitui a lista de recados do usuário.
      * @param recados nova lista de recados
      */
     public void setRecados(List<Recado> recados) {

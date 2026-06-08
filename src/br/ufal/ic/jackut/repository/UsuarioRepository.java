@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * RepositÃ³rio responsÃ¡vel por manter e recuperar instÃ¢ncias de `Usuario`.
+ * Repositório responsável por manter e recuperar instâncias de `Usuario`.
  */
 public class UsuarioRepository {
 
@@ -15,7 +15,7 @@ public class UsuarioRepository {
     private final UsuarioXml armazenamento;
 
     /**
-     * Inicializa o repositÃ³rio carregando os usuÃ¡rios persistidos, se houver.
+     * Inicializa o repositório carregando os usuários persistidos, se houver.
      */
     public UsuarioRepository() {
         this.armazenamento = new UsuarioXml();
@@ -23,16 +23,16 @@ public class UsuarioRepository {
     }
 
     /**
-     * Persiste o mapa de usuÃ¡rios atual em disco (XML).
+     * Persiste o mapa de usuários atual em disco (XML).
      */
     public void save() {
         armazenamento.salvar(usuarios);
     }
 
     /**
-     * Adiciona um usuÃ¡rio ao repositÃ³rio.
+     * Adiciona um usuário ao repositório.
      *
-     * @param usuario o usuÃ¡rio a adicionar
+     * @param usuario o usuário a adicionar
      */
     public void adicionarUsuario(Usuario usuario) {
 
@@ -40,7 +40,7 @@ public class UsuarioRepository {
     }
 
     /**
-     * Remove todos os usuÃ¡rios mantidos em memÃ³ria.
+     * Remove todos os usuários mantidos em memória.
      */
     public void limpar() {
         usuarios.clear();
@@ -54,11 +54,11 @@ public class UsuarioRepository {
     }
 
     /**
-     * Busca um usuÃ¡rio pelo login.
+     * Busca um usuário pelo login.
      *
-     * @param login login do usuÃ¡rio
+     * @param login login do usuário
      * @return o `Usuario` encontrado
-     * @throws UsuarioNaoCadastradoException se nÃ£o existir usuÃ¡rio com o login
+     * @throws UsuarioNaoCadastradoException se não existir usuário com o login
      */
     public Usuario buscarUsuario(String login) throws UsuarioNaoCadastradoException {
 
@@ -72,7 +72,7 @@ public class UsuarioRepository {
     }
 
     /**
-     * Retorna uma cÃ³pia do mapa de usuÃ¡rios.
+     * Retorna uma cópia do mapa de usuários.
      *
      * @return mapa de login->Usuario
      */

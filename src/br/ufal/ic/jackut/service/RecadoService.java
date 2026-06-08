@@ -12,7 +12,7 @@ import br.ufal.ic.jackut.repository.UsuarioRepository;
 import java.util.List;
 
 /**
- * Servi√ßo respons√°vel pelo envio e leitura de recados.
+ * ServiÁo respons·vel pelo envio e leitura de recados.
  */
 public class RecadoService {
 
@@ -20,10 +20,10 @@ public class RecadoService {
     private final SessaoRepository sessaoRepository;
 
     /**
-     * Cria o servi√ßo com os reposit√≥rios necess√°rios para consultar usu√°rios e sess√µes.
+     * Cria o serviÁo com os repositÛrios necess·rios para consultar usu·rios e sessıes.
      *
-     * @param usuarioRepository reposit√≥rio de usu√°rios
-     * @param sessaoRepository reposit√≥rio de sess√µes
+     * @param usuarioRepository repositÛrio de usu·rios
+     * @param sessaoRepository repositÛrio de sessıes
      */
     public RecadoService(UsuarioRepository usuarioRepository, SessaoRepository sessaoRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -31,14 +31,14 @@ public class RecadoService {
     }
 
     /**
-     * Envia um recado a partir da sess√£o identificada por `id` para o
-     * usu√°rio `destinatario` com o texto `mensagem`.
+     * Envia um recado a partir da sess„o identificada por `id` para o
+     * usu·rio `destinatario` com o texto `mensagem`.
      *
-     * @param id id da sess√£o do usu√°rio remetente
-     * @param destinatario login do usu√°rio destinat√°rio
+     * @param id id da sess„o do usu·rio remetente
+     * @param destinatario login do usu·rio destinat·rio
      * @param mensagem texto do recado
-     * @throws UsuarioNaoCadastradoException se a sess√£o n√£o existir
-     * @throws UsuarioNaoPodeSeAutoEnviarMensagemException se o remetente for o mesmo do destinat√°rio
+     * @throws UsuarioNaoCadastradoException se a sess„o n„o existir
+     * @throws UsuarioNaoPodeSeAutoEnviarMensagemException se o remetente for o mesmo do destinat·rio
      */
     public void enviarRecado(String id, String destinatario, String mensagem)
             throws UsuarioNaoCadastradoException, UsuarioNaoPodeSeAutoEnviarMensagemException {
@@ -64,13 +64,13 @@ public class RecadoService {
     }
 
     /**
-     * L√™ o recado mais antigo da fila de recados do usu√°rio
-     * associado √† sess√£o `id`.
+     * LÍ o recado mais antigo da fila de recados do usu·rio
+     * associado ‡ sess„o `id`.
      *
-     * @param id id da sess√£o do usu√°rio
+     * @param id id da sess„o do usu·rio
      * @return o texto do recado lido
-     * @throws UsuarioNaoCadastradoException se a sess√£o n√£o existir
-     * @throws NaoHaRecadosException se n√£o existirem recados para o usu√°rio
+     * @throws UsuarioNaoCadastradoException se a sess„o n„o existir
+     * @throws NaoHaRecadosException se n„o existirem recados para o usu·rio
      */
     public String lerRecado(String id)
             throws UsuarioNaoCadastradoException, NaoHaRecadosException {

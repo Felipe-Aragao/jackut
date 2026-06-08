@@ -12,7 +12,7 @@ import br.ufal.ic.jackut.repository.UsuarioRepository;
 import java.util.Set;
 
 /**
- * Servi√ßo respons√°vel pelas regras de convites e amizades entre usu√°rios.
+ * ServiÁo respons·vel pelas regras de convites e amizades entre usu·rios.
  */
 public class AmizadeService {
 
@@ -20,10 +20,10 @@ public class AmizadeService {
     private final SessaoRepository sessaoRepository;
 
     /**
-     * Cria o servi√ßo com os reposit√≥rios necess√°rios para consultar usu√°rios e sess√µes.
+     * Cria o serviÁo com os repositÛrios necess·rios para consultar usu·rios e sessıes.
      *
-     * @param usuarioRepository reposit√≥rio de usu√°rios
-     * @param sessaoRepository reposit√≥rio de sess√µes
+     * @param usuarioRepository repositÛrio de usu·rios
+     * @param sessaoRepository repositÛrio de sessıes
      */
     public AmizadeService(UsuarioRepository usuarioRepository, SessaoRepository sessaoRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -31,16 +31,16 @@ public class AmizadeService {
     }
 
     /**
-     * Envia um pedido de amizade do usu√°rio identificado pela sess√£o `id`
-     * ao usu√°rio `amigo`. O relacionamento s√≥ √© efetivado quando o outro
-     * usu√°rio adicionar de volta.
+     * Envia um pedido de amizade do usu·rio identificado pela sess„o `id`
+     * ao usu·rio `amigo`. O relacionamento sÛ È efetivado quando o outro
+     * usu·rio adicionar de volta.
      *
-     * @param id id da sess√£o do usu√°rio que envia o pedido
-     * @param amigo login do usu√°rio alvo do pedido
-     * @throws UsuarioNaoCadastradoException se a sess√£o for inv√°lida
-     * @throws UsuarioJaEstaAdicionadoComoAmigoException se j√° s√£o amigos
-     * @throws EsperandoAceitacaoDoConviteException se j√° existe um convite pendente
-     * @throws UsuarioNaoPodeSeAutoAdicionarException se o usu√°rio tentar adicionar a si
+     * @param id id da sess„o do usu·rio que envia o pedido
+     * @param amigo login do usu·rio alvo do pedido
+     * @throws UsuarioNaoCadastradoException se a sess„o for inv·lida
+     * @throws UsuarioJaEstaAdicionadoComoAmigoException se j· s„o amigos
+     * @throws EsperandoAceitacaoDoConviteException se j· existe um convite pendente
+     * @throws UsuarioNaoPodeSeAutoAdicionarException se o usu·rio tentar adicionar a si
      */
     public void adicionarAmigo(String id, String amigo)
             throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoAmigoException,
@@ -89,10 +89,10 @@ public class AmizadeService {
     /**
      * Verifica se `amigo` faz parte da lista de amigos de `login`.
      *
-     * @param login login do usu√°rio que consulta
-     * @param amigo login do poss√≠vel amigo
-     * @return true se s√£o amigos, false caso contr√°rio
-     * @throws UsuarioNaoCadastradoException se o usu√°rio do `login` n√£o existir
+     * @param login login do usu·rio que consulta
+     * @param amigo login do possÌvel amigo
+     * @return true se s„o amigos, false caso contr·rio
+     * @throws UsuarioNaoCadastradoException se o usu·rio do `login` n„o existir
      */
     public boolean ehAmigo(String login, String amigo) throws UsuarioNaoCadastradoException {
         Usuario usuario = usuarioRepository.buscarUsuario(login);
@@ -100,11 +100,11 @@ public class AmizadeService {
     }
 
     /**
-     * Retorna a lista de amigos do usu√°rio no formato {a,b,c}
+     * Retorna a lista de amigos do usu·rio no formato {a,b,c}
      *
-     * @param login login do usu√°rio
-     * @return string contendo os amigos do usu√°rio
-     * @throws UsuarioNaoCadastradoException se o usu√°rio n√£o existir
+     * @param login login do usu·rio
+     * @return string contendo os amigos do usu·rio
+     * @throws UsuarioNaoCadastradoException se o usu·rio n„o existir
      */
     public String getAmigos(String login) throws UsuarioNaoCadastradoException {
         Usuario usuario = usuarioRepository.buscarUsuario(login);

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Respons√°vel pela persist√™ncia XML dos usu√°rios.
+ * Respons·vel pela persistÍncia XML dos usu·rios.
  */
 public class UsuarioXml {
 
@@ -20,9 +20,9 @@ public class UsuarioXml {
     private static final String CAMINHO = DIRETORIO + "/usuario.xml";
 
     /**
-     * Salva o mapa de usu√°rios no arquivo XML de persist√™ncia.
+     * Salva o mapa de usu·rios no arquivo XML de persistÍncia.
      *
-     * @param usuarios mapa de login para usu√°rio que ser√° persistido
+     * @param usuarios mapa de login para usu·rio que ser· persistido
      */
     public void salvar(Map<String, Usuario> usuarios) {
         File diretorio = new File(DIRETORIO);
@@ -38,9 +38,9 @@ public class UsuarioXml {
     }
 
     /**
-     * Carrega os usu√°rios persistidos em XML.
+     * Carrega os usu·rios persistidos em XML.
      *
-     * @return mapa de login para usu√°rio carregado do arquivo, ou mapa vazio se n√£o houver dados
+     * @return mapa de login para usu·rio carregado do arquivo, ou mapa vazio se n„o houver dados
      */
     @SuppressWarnings("unchecked")
     public Map<String, Usuario> carregar() {
@@ -59,7 +59,7 @@ public class UsuarioXml {
     }
 
     /**
-     * Apaga o arquivo XML usado para persistir os usu√°rios.
+     * Apaga o arquivo XML usado para persistir os usu·rios.
      */
     public void apagar() {
         new File(CAMINHO).delete();

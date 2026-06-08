@@ -9,7 +9,7 @@ import br.ufal.ic.jackut.repository.UsuarioRepository;
 import java.util.Map;
 
 /**
- * Servi√ßo para opera√ß√µes relacionadas a usu√°rios: cria√ß√£o e leitura de atributos.
+ * ServiÁo para operaÁıes relacionadas a usu·rios: criaÁ„o e leitura de atributos.
  */
 public class UsuarioService {
 
@@ -17,10 +17,10 @@ public class UsuarioService {
     private final SessaoRepository sessaoRepository;
 
     /**
-     * Cria o servi√ßo com o reposit√≥rio de usu√°rios e sess√µes fornecido.
+     * Cria o serviÁo com o repositÛrio de usu·rios e sessıes fornecido.
      *
-     * @param usuarioRepository reposit√≥rio de usu√°rios
-     * @param sessaoRepository reposit√≥rio de sess√µes
+     * @param usuarioRepository repositÛrio de usu·rios
+     * @param sessaoRepository repositÛrio de sessıes
      */
     public UsuarioService(UsuarioRepository usuarioRepository, SessaoRepository sessaoRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -28,12 +28,12 @@ public class UsuarioService {
     }
 
     /**
-     * Cria um usu√°rio ap√≥s validar login e senha.
+     * Cria um usu·rio apÛs validar login e senha.
      *
      * @param login login desejado
-     * @param senha senha do usu√°rio
-     * @param nome  nome do usu√°rio
-     * @throws ContaJaExisteException se j√° existir usu√°rio com o mesmo login
+     * @param senha senha do usu·rio
+     * @param nome  nome do usu·rio
+     * @throws ContaJaExisteException se j· existir usu·rio com o mesmo login
      * @throws LoginInvalidoException se o login for nulo ou vazio
      * @throws SenhaInvalidaException se a senha for nula ou vazia
      */
@@ -59,12 +59,12 @@ public class UsuarioService {
     }
 
     /**
-     * Retorna o valor de um atributo do usu√°rio com o login informado.
+     * Retorna o valor de um atributo do usu·rio com o login informado.
      *
-     * @param login    o login do usu√°rio
+     * @param login    o login do usu·rio
      * @param atributo o nome do atributo a obter
      * @return o valor do atributo ou null se inexistente
-     * @throws UsuarioNaoCadastradoException se o usu√°rio n√£o existir
+     * @throws UsuarioNaoCadastradoException se o usu·rio n„o existir
      */
     public String getAtributoUsuario(String login, String atributo)
             throws UsuarioNaoCadastradoException, AtributoNaoPreenchidoException {
@@ -80,11 +80,11 @@ public class UsuarioService {
     }
 
     /**
-     * Edita o valor de um atributo do usu√°rio com base no id da sess√£o.
-     * @param id id da sess√£o
-     * @param atributo atributo que ser√° editado
+     * Edita o valor de um atributo do usu·rio com base no id da sess„o.
+     * @param id id da sess„o
+     * @param atributo atributo que ser· editado
      * @param valor novo valor do atributo
-     * @throws UsuarioNaoCadastradoException se n√£o existir sess√£o
+     * @throws UsuarioNaoCadastradoException se n„o existir sess„o
      */
 
     public void editarPerfil(String id, String atributo, String valor)

@@ -8,7 +8,7 @@ import br.ufal.ic.jackut.repository.SessaoRepository;
 import br.ufal.ic.jackut.repository.UsuarioRepository;
 
 /**
- * Servi√ßo respons√°vel pelo gerenciamento de sess√µes.
+ * ServiÁo respons·vel pelo gerenciamento de sessıes.
  */
 public class SessaoService {
 
@@ -16,10 +16,10 @@ public class SessaoService {
     private final SessaoRepository sessaoRepository;
 
     /**
-     * Cria o servi√ßo com o reposit√≥rio de usu√°rios e sess√µes fornecido.
+     * Cria o serviÁo com o repositÛrio de usu·rios e sessıes fornecido.
      *
-     * @param usuarioRepository reposit√≥rio de usu√°rios
-     * @param sessaoRepository reposit√≥rio de sess√µes
+     * @param usuarioRepository repositÛrio de usu·rios
+     * @param sessaoRepository repositÛrio de sessıes
      */
     public SessaoService(UsuarioRepository usuarioRepository, SessaoRepository sessaoRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -27,13 +27,13 @@ public class SessaoService {
     }
 
     /**
-     * Valida as credenciais e abre uma sess√£o. Lan√ßa exce√ß√£o se login/senha
-     * forem inv√°lidos ou n√£o corresponderem a um usu√°rio cadastrado.
+     * Valida as credenciais e abre uma sess„o. LanÁa exceÁ„o se login/senha
+     * forem inv·lidos ou n„o corresponderem a um usu·rio cadastrado.
      *
-     * @param login login do usu√°rio
-     * @param senha senha do usu√°rio
-     * @return o id da sess√£o
-     * @throws LoginOuSenhaInvalidoException se as credenciais forem inv√°lidas
+     * @param login login do usu·rio
+     * @param senha senha do usu·rio
+     * @return o id da sess„o
+     * @throws LoginOuSenhaInvalidoException se as credenciais forem inv·lidas
      */
     public String abrirSessao(String login, String senha) throws LoginOuSenhaInvalidoException{
 

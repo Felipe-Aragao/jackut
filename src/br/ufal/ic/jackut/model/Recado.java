@@ -1,8 +1,8 @@
 package br.ufal.ic.jackut.model;
 
 /**
- * Representa um recado trocado entre usu√°rios do sistema.
- * Cont√©m remetente, destinat√°rio e o texto da mensagem.
+ * Representa um recado trocado entre usu·rios do sistema.
+ * ContÈm remetente, destinat·rio e o texto da mensagem.
  */
 public class Recado {
 
@@ -11,9 +11,9 @@ public class Recado {
     private String mensagem;
 
     /**
-     * Cria um recado com remetente, destinat√°rio e mensagem.
-     * @param remetente login do usu√°rio que enviou o recado
-     * @param destinatario login do usu√°rio que receber√° o recado
+     * Cria um recado com remetente, destinat·rio e mensagem.
+     * @param remetente login do usu·rio que enviou o recado
+     * @param destinatario login do usu·rio que receber· o recado
      * @param mensagem texto do recado
      */
     public Recado(String remetente, String destinatario, String mensagem) {
@@ -36,12 +36,12 @@ public class Recado {
         this.remetente = remetente;
     }
 
-    /** Retorna o login do destinat√°rio. */
+    /** Retorna o login do destinat·rio. */
     public String getDestinatario() {
         return destinatario;
     }
 
-    /** Define o login do destinat√°rio. */
+    /** Define o login do destinat·rio. */
     public void setDestinatario(String destinatario) {
         this.destinatario = destinatario;
     }

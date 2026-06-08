@@ -9,8 +9,8 @@ import br.ufal.ic.jackut.service.SessaoService;
 import br.ufal.ic.jackut.service.UsuarioService;
 
 /**
- * Facade que exp√µe a API p√∫blica do sistema para uso em testes.
- * Agrupa os servi√ßos de usu√°rio e sess√£o e delega opera√ß√µes a eles.
+ * Facade que expıe a API p˙blica do sistema para uso em testes.
+ * Agrupa os serviÁos de usu·rio e sess„o e delega operaÁıes a eles.
  */
 public class Facade {
 
@@ -22,7 +22,7 @@ public class Facade {
     SessaoRepository sessaoRepository;
 
     /**
-     * Inicializa a fachada com os reposit√≥rios e servi√ßos usados pelo sistema.
+     * Inicializa a fachada com os repositÛrios e serviÁos usados pelo sistema.
      */
     public Facade() {
         this.usuarioRepository = new UsuarioRepository();
@@ -36,8 +36,8 @@ public class Facade {
     // Sistema
 
     /**
-     * Zera o sistema removendo todos os usu√°rios em mem√≥ria e excluindo
-     * o arquivo de persist√™ncia.
+     * Zera o sistema removendo todos os usu·rios em memÛria e excluindo
+     * o arquivo de persistÍncia.
      */
     public void zerarSistema(){
         usuarioRepository.limpar();
@@ -46,7 +46,7 @@ public class Facade {
     }
 
     /**
-     * Salva o estado atual do reposit√≥rio de usu√°rios no disco.
+     * Salva o estado atual do repositÛrio de usu·rios no disco.
      */
     public void encerrarSistema(){
         usuarioRepository.save();
@@ -54,13 +54,13 @@ public class Facade {
 
     // Usuario
     /**
-     * Retorna o valor de um atributo do usu√°rio identificado por `login`.
+     * Retorna o valor de um atributo do usu·rio identificado por `login`.
      *
-     * @param login login do usu√°rio
+     * @param login login do usu·rio
      * @param atributo o nome do atributo a ser buscado
      * @return o valor do atributo
-     * @throws UsuarioNaoCadastradoException se o usu√°rio n√£o existir
-     * @throws AtributoNaoPreenchidoException se o atributo n√£o estiver preenchido
+     * @throws UsuarioNaoCadastradoException se o usu·rio n„o existir
+     * @throws AtributoNaoPreenchidoException se o atributo n„o estiver preenchido
      */
     public String getAtributoUsuario(String login, String atributo)
             throws UsuarioNaoCadastradoException, AtributoNaoPreenchidoException {
@@ -68,29 +68,29 @@ public class Facade {
     }
 
     /**
-     * Cria um usu√°rio com `login`, `senha` e `nome`.
+     * Cria um usu·rio com `login`, `senha` e `nome`.
      *
      * @param login login desejado
-     * @param senha senha do usu√°rio
-     * @param nome nome do usu√°rio
-     * @throws ContaJaExisteException se j√° existir usu√°rio com o mesmo login
-     * @throws SenhaInvalidaException se a senha for inv√°lida
-     * @throws LoginInvalidoException se o login for inv√°lido
+     * @param senha senha do usu·rio
+     * @param nome nome do usu·rio
+     * @throws ContaJaExisteException se j· existir usu·rio com o mesmo login
+     * @throws SenhaInvalidaException se a senha for inv·lida
+     * @throws LoginInvalidoException se o login for inv·lido
      */
     public void criarUsuario(String login, String senha, String nome)
             throws ContaJaExisteException, SenhaInvalidaException, LoginInvalidoException {
         usuarioService.criarUsuario(login, senha, nome);
     }
 
-    //Sess√£o
+    //Sess„o
 
     /**
-     * Abre uma sess√£o para o usu√°rio com `login` e `senha`.
+     * Abre uma sess„o para o usu·rio com `login` e `senha`.
      *
-     * @param login login do usu√°rio
-     * @param senha senha do usu√°rio
-     * @return o id da sess√£o
-     * @throws LoginOuSenhaInvalidoException se o login ou senha estiverem inv√°lidos
+     * @param login login do usu·rio
+     * @param senha senha do usu·rio
+     * @return o id da sess„o
+     * @throws LoginOuSenhaInvalidoException se o login ou senha estiverem inv·lidos
      */
     public String abrirSessao(String login, String senha)
             throws LoginOuSenhaInvalidoException {
@@ -98,12 +98,12 @@ public class Facade {
     }
 
     /**
-     * Edita um atributo do perfil do usu√°rio associado √† sess√£o informada.
+     * Edita um atributo do perfil do usu·rio associado ‡ sess„o informada.
      *
-     * @param id id da sess√£o do usu√°rio
-     * @param atributo atributo que ser√° criado ou alterado
+     * @param id id da sess„o do usu·rio
+     * @param atributo atributo que ser· criado ou alterado
      * @param valor novo valor do atributo
-     * @throws UsuarioNaoCadastradoException se a sess√£o n√£o existir
+     * @throws UsuarioNaoCadastradoException se a sess„o n„o existir
      */
     public void editarPerfil(String id, String atributo, String valor)
             throws UsuarioNaoCadastradoException {
@@ -111,16 +111,16 @@ public class Facade {
     }
 
     /**
-     * Envia um pedido de amizade do usu√°rio identificado pela sess√£o `id`
-     * ao usu√°rio `amigo`. O relacionamento s√≥ √© efetivado quando o outro
-     * usu√°rio adicionar de volta.
+     * Envia um pedido de amizade do usu·rio identificado pela sess„o `id`
+     * ao usu·rio `amigo`. O relacionamento sÛ È efetivado quando o outro
+     * usu·rio adicionar de volta.
      *
-     * @param id id da sess√£o do usu√°rio que envia o pedido
-     * @param amigo login do usu√°rio alvo do pedido
-     * @throws UsuarioNaoCadastradoException se a sess√£o for inv√°lida
-     * @throws UsuarioJaEstaAdicionadoComoAmigoException se j√° s√£o amigos
-     * @throws EsperandoAceitacaoDoConviteException se j√° existe um convite pendente
-     * @throws UsuarioNaoPodeSeAutoAdicionarException se o usu√°rio tentar adicionar a si mesmo
+     * @param id id da sess„o do usu·rio que envia o pedido
+     * @param amigo login do usu·rio alvo do pedido
+     * @throws UsuarioNaoCadastradoException se a sess„o for inv·lida
+     * @throws UsuarioJaEstaAdicionadoComoAmigoException se j· s„o amigos
+     * @throws EsperandoAceitacaoDoConviteException se j· existe um convite pendente
+     * @throws UsuarioNaoPodeSeAutoAdicionarException se o usu·rio tentar adicionar a si mesmo
      */
     public void adicionarAmigo(String id, String amigo)
             throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoAmigoException,
@@ -131,10 +131,10 @@ public class Facade {
     /**
      * Verifica se `amigo` faz parte da lista de amigos de `login`.
      *
-     * @param login login do usu√°rio que consulta
-     * @param amigo login do poss√≠vel amigo
-     * @return true se s√£o amigos, false caso contr√°rio
-     * @throws UsuarioNaoCadastradoException se o usu√°rio do `login` n√£o existir
+     * @param login login do usu·rio que consulta
+     * @param amigo login do possÌvel amigo
+     * @return true se s„o amigos, false caso contr·rio
+     * @throws UsuarioNaoCadastradoException se o usu·rio do `login` n„o existir
      */
     public boolean ehAmigo(String login ,String amigo)
             throws UsuarioNaoCadastradoException {
@@ -142,22 +142,22 @@ public class Facade {
     }
 
     /**
-     * Retorna a lista de amigos do usu√°rio no formato {a,b,c}
+     * Retorna a lista de amigos do usu·rio no formato {a,b,c}
      *
-     * @param login login do usu√°rio
-     * @return string contendo os amigos do usu√°rio
-     * @throws UsuarioNaoCadastradoException se o usu√°rio n√£o existir
+     * @param login login do usu·rio
+     * @return string contendo os amigos do usu·rio
+     * @throws UsuarioNaoCadastradoException se o usu·rio n„o existir
      */
     public String getAmigos(String login) throws UsuarioNaoCadastradoException {
         return amizadeService.getAmigos(login);
     }
 
     /**
-     * Encaminha um recado a partir da sess√£o `id` para `destinatario`.
-     * @param id id da sess√£o do remetente
-     * @param destinatario login do destinat√°rio
+     * Encaminha um recado a partir da sess„o `id` para `destinatario`.
+     * @param id id da sess„o do remetente
+     * @param destinatario login do destinat·rio
      * @param mensagem texto do recado
-     * @throws UsuarioNaoCadastradoException se a sess√£o for inv√°lida
+     * @throws UsuarioNaoCadastradoException se a sess„o for inv·lida
      * @throws UsuarioNaoPodeSeAutoEnviarMensagemException se tentar enviar recado para si
      */
     public void enviarRecado(String id , String destinatario, String mensagem)
@@ -166,11 +166,11 @@ public class Facade {
     }
 
     /**
-     * L√™ o recado mais antigo recebido pelo usu√°rio associado √† sess√£o `id`.
-     * @param id id da sess√£o do usu√°rio
+     * LÍ o recado mais antigo recebido pelo usu·rio associado ‡ sess„o `id`.
+     * @param id id da sess„o do usu·rio
      * @return texto do recado lido
-     * @throws UsuarioNaoCadastradoException se a sess√£o for inv√°lida
-     * @throws NaoHaRecadosException se n√£o houver recados a serem lidos
+     * @throws UsuarioNaoCadastradoException se a sess„o for inv·lida
+     * @throws NaoHaRecadosException se n„o houver recados a serem lidos
      */
     public String lerRecado(String id)
             throws UsuarioNaoCadastradoException, NaoHaRecadosException {

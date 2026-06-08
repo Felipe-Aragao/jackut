@@ -3,8 +3,8 @@ package br.ufal.ic.jackut.model;
 import java.util.UUID;
 
 /**
- * Representa uma sess√£o de usu√°rio no sistema. A sess√£o possui um identificador
- * √∫nico (`id`) gerado aleatoriamente e refer√™ncia ao `Usuario` associado.
+ * Representa uma sess„o de usu·rio no sistema. A sess„o possui um identificador
+ * ˙nico (`id`) gerado aleatoriamente e referÍncia ao `Usuario` associado.
  */
 public class Sessao {
 
@@ -12,9 +12,9 @@ public class Sessao {
     private Usuario usuario;
 
     /**
-     * Cria uma nova sess√£o para o usu√°rio informado, gerando um `id` √∫nico.
+     * Cria uma nova sess„o para o usu·rio informado, gerando um `id` ˙nico.
      *
-     * @param usuario o usu√°rio associado √† sess√£o
+     * @param usuario o usu·rio associado ‡ sess„o
      */
     public Sessao(Usuario usuario) {
         this.id = UUID.randomUUID().toString();

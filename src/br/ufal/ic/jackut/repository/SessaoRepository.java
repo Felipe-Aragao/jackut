@@ -6,32 +6,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Reposit贸rio respons谩vel por manter e recuperar inst芒ncias de `Sessao` em mem贸ria.
+ * Reposit髍io respons醰el por manter e recuperar inst鈔cias de `Sessao` em mem髍ia.
  */
 
 public class SessaoRepository {
     private final Map<String, Sessao> sessoes;
 
     /**
-     * Inicializa o reposit贸rio de sess玫es vazio.
+     * Inicializa o reposit髍io de sess鮡s vazio.
      */
     public SessaoRepository() {
         this.sessoes = new HashMap<>();
     }
 
     /**
-     * Adiciona uma sess茫o ao reposit贸rio.
+     * Adiciona uma sess鉶 ao reposit髍io.
      *
-     * @param sessao a sess茫o a adicionar
+     * @param sessao a sess鉶 a adicionar
      */
     public void adicionarSessao(Sessao sessao) {
         sessoes.put(sessao.getId(), sessao);
     }
 
     /**
-     * Busca uma sess茫o pelo id.
+     * Busca uma sess鉶 pelo id.
      *
-     * @param id id da sess茫o
+     * @param id id da sess鉶
      * @return a `Sessao` encontrada
      */
     public Sessao buscarSessao(String id) {
@@ -39,7 +39,7 @@ public class SessaoRepository {
     }
 
     /**
-     * Remove todas as sess玫es mantidas em mem贸ria.
+     * Remove todas as sess鮡s mantidas em mem髍ia.
      */
     public void limpar() {
         sessoes.clear();
