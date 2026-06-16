@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Responsável pela persistência XML dos usuários.
+ * Responsï¿½vel pela persistï¿½ncia XML dos usuï¿½rios.
  */
 public class UsuarioXml {
 
@@ -20,9 +20,9 @@ public class UsuarioXml {
     private static final String CAMINHO = DIRETORIO + "/usuario.xml";
 
     /**
-     * Salva o mapa de usuários no arquivo XML de persistência.
+     * Salva o mapa de usuï¿½rios no arquivo XML de persistï¿½ncia.
      *
-     * @param usuarios mapa de login para usuário que será persistido
+     * @param usuarios mapa de login para usuï¿½rio que serï¿½ persistido
      */
     public void salvar(Map<String, Usuario> usuarios) {
         File diretorio = new File(DIRETORIO);
@@ -38,9 +38,9 @@ public class UsuarioXml {
     }
 
     /**
-     * Carrega os usuários persistidos em XML.
+     * Carrega os usuï¿½rios persistidos em XML.
      *
-     * @return mapa de login para usuário carregado do arquivo, ou mapa vazio se não houver dados
+     * @return mapa de login para usuï¿½rio carregado do arquivo, ou mapa vazio se nï¿½o houver dados
      */
     @SuppressWarnings("unchecked")
     public Map<String, Usuario> carregar() {
@@ -50,16 +50,15 @@ public class UsuarioXml {
         }
 
         try (XMLDecoder decoder = new XMLDecoder(new FileInputStream(file))) {
-            Object data = decoder.readObject();
-            return data instanceof Map ? (Map<String, Usuario>) data : new HashMap<>();
-        } catch (IOException e) {
+             return (Map<String, Usuario>) decoder.readObject();
+        } catch (IOException | ClassCastException e) {
             System.err.println("Erro ao carregar dados de " + CAMINHO + ": " + e.getMessage());
             return new HashMap<>();
         }
     }
 
     /**
-     * Apaga o arquivo XML usado para persistir os usuários.
+     * Apaga o arquivo XML usado para persistir os usuï¿½rios.
      */
     public void apagar() {
         new File(CAMINHO).delete();
