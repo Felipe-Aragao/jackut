@@ -2,6 +2,7 @@ package br.ufal.ic.jackut.model;
 
 import br.ufal.ic.jackut.exception.EsperandoAceitacaoDoConviteException;
 import br.ufal.ic.jackut.exception.NaoHaRecadosException;
+import br.ufal.ic.jackut.exception.NaoHaMensagensException;
 import br.ufal.ic.jackut.exception.UsuarioJaEstaAdicionadoComoAmigoException;
 import br.ufal.ic.jackut.exception.UsuarioNaoPodeSeAutoAdicionarException;
 import br.ufal.ic.jackut.exception.UsuarioNaoPodeSeAutoEnviarMensagemException;
@@ -23,6 +24,7 @@ public class Usuario {
     private Set<String> convites = new LinkedHashSet<>();
     
     private List<Recado> recados = new ArrayList<>();
+    private List<String> mensagens = new ArrayList<>();
 
     /**
      * Cria um usuário com login, senha e nome (armazenado em atributos).
@@ -229,6 +231,26 @@ public class Usuario {
         }
 
         return recados.remove(0).getMensagem();
+    }
+
+    public List<String> getMensagens() {
+        return new ArrayList<>(mensagens);
+    }
+
+    public void setMensagens(List<String> mensagens) {
+        this.mensagens = new ArrayList<>(mensagens);
+    }
+
+    public void receberMensagem(String mensagem) {
+        mensagens.add(mensagem);
+    }
+
+    public String lerMensagemMaisAntiga() throws NaoHaMensagensException {
+        if (mensagens.isEmpty()) {
+            throw new NaoHaMensagensException();
+        }
+
+        return mensagens.remove(0);
     }
 
     private void receberRecado(Recado recado) {

@@ -17,6 +17,7 @@ public class Facade {
     private final SessaoService sessaoService;
     private final AmizadeService amizadeService;
     private final RecadoService recadoService;
+    private final MensagemService mensagemService;
     private final ComunidadeService comunidadeService;
     UsuarioRepository usuarioRepository;
     SessaoRepository sessaoRepository;
@@ -35,6 +36,7 @@ public class Facade {
         this.sessaoService = new SessaoService(usuarioRepository, sessaoRepository);
         this.amizadeService = new AmizadeService(usuarioRepository, sessaoRepository);
         this.recadoService = new RecadoService(usuarioRepository, sessaoRepository);
+        this.mensagemService = new MensagemService(usuarioRepository, sessaoRepository, comunidadeRepository, participacaoComunidadeRepository);
         this.comunidadeService = new ComunidadeService(usuarioRepository, sessaoRepository, comunidadeRepository, participacaoComunidadeRepository);
     }
 
@@ -190,6 +192,18 @@ public class Facade {
     public String lerRecado(String id)
             throws UsuarioNaoCadastradoException, NaoHaRecadosException {
         return  recadoService.lerRecado(id);
+    }
+
+    // Mensagem
+
+    public void enviarMensagem(String id, String comunidade, String mensagem)
+            throws UsuarioNaoCadastradoException, ComunidadeNaoExisteException {
+        mensagemService.enviarMensagem(id, comunidade, mensagem);
+    }
+
+    public String lerMensagem(String id)
+            throws UsuarioNaoCadastradoException, NaoHaMensagensException {
+        return mensagemService.lerMensagem(id);
     }
 
     // Comunidade
