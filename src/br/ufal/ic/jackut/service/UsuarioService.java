@@ -6,8 +6,6 @@ import br.ufal.ic.jackut.model.Usuario;
 import br.ufal.ic.jackut.repository.SessaoRepository;
 import br.ufal.ic.jackut.repository.UsuarioRepository;
 
-import java.util.Map;
-
 /**
  * Serviço para operações relacionadas a usuários: criação e leitura de atributos.
  */
@@ -63,14 +61,15 @@ public class UsuarioService {
      *
      * @param login    o login do usuário
      * @param atributo o nome do atributo a obter
-     * @return o valor do atributo ou null se inexistente
+     * @return o valor do atributo
      * @throws UsuarioNaoCadastradoException se o usuário não existir
+     * @throws AtributoNaoPreenchidoException se o atributo não estiver preenchido
      */
     public String getAtributoUsuario(String login, String atributo)
             throws UsuarioNaoCadastradoException, AtributoNaoPreenchidoException {
         Usuario usuario = usuarioRepository.buscarUsuario(login);
 
-        String valorAtributo = usuario.getAtributos().get(atributo);
+        String valorAtributo = usuario.getAtributo(atributo);
 
         if (valorAtributo == null) {
             throw new AtributoNaoPreenchidoException();
@@ -86,7 +85,6 @@ public class UsuarioService {
      * @param valor novo valor do atributo
      * @throws UsuarioNaoCadastradoException se não existir sessão
      */
-
     public void editarPerfil(String id, String atributo, String valor)
             throws UsuarioNaoCadastradoException{
 
@@ -97,14 +95,7 @@ public class UsuarioService {
         }
 
         Usuario usuario = sessao.getUsuario();
-
-        Map<String, String> atributos = usuario.getAtributos();
-
-        if (atributos.replace(atributo, valor) == null) {
-            atributos.put(atributo, valor);
-        }
-
-        usuario.setAtributos(atributos);
+        usuario.editarAtributo(atributo, valor);
     }
 
 }

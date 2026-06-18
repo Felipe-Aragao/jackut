@@ -9,10 +9,8 @@ import br.ufal.ic.jackut.model.Usuario;
 import br.ufal.ic.jackut.repository.SessaoRepository;
 import br.ufal.ic.jackut.repository.UsuarioRepository;
 
-import java.util.Set;
-
 /**
- * Serviço responsável pelas regras de convites e amizades entre usuários.
+ * Serviço responsável por localizar usuários e delegar regras de amizade ao modelo.
  */
 public class AmizadeService {
 
@@ -37,7 +35,7 @@ public class AmizadeService {
      *
      * @param id id da sessão do usuário que envia o pedido
      * @param amigo login do usuário alvo do pedido
-     * @throws UsuarioNaoCadastradoException se a sessão for inválida
+     * @throws UsuarioNaoCadastradoException se a sessão for inválida ou o usuário alvo não existir
      * @throws UsuarioJaEstaAdicionadoComoAmigoException se já são amigos
      * @throws EsperandoAceitacaoDoConviteException se já existe um convite pendente
      * @throws UsuarioNaoPodeSeAutoAdicionarException se o usuário tentar adicionar a si
@@ -53,37 +51,9 @@ public class AmizadeService {
         }
 
         Usuario usuario = sessao.getUsuario();
-        if (usuario.getLogin().equals(amigo)) {
-            throw new UsuarioNaoPodeSeAutoAdicionarException();
-        }
-
         Usuario usuarioAlvo = usuarioRepository.buscarUsuario(amigo);
 
-        Set<String> amigos = usuario.getAmigos();
-        Set<String> convites = usuario.getConvites();
-
-        Set<String> amigosAlvo = usuarioAlvo.getAmigos();
-        Set<String> convitesAlvo = usuarioAlvo.getConvites();
-
-        if (amigos.contains(amigo) || amigosAlvo.contains(usuario.getLogin())) {
-            throw new UsuarioJaEstaAdicionadoComoAmigoException();
-        }
-
-        if (convites.contains(amigo)) {
-            amigos.add(amigo);
-            amigosAlvo.add(usuario.getLogin());
-            convites.remove(amigo);
-        } else {
-            if (convitesAlvo.contains(usuario.getLogin())) {
-                throw new EsperandoAceitacaoDoConviteException();
-            }
-            convitesAlvo.add(usuario.getLogin());
-        }
-
-        usuario.setAmigos(amigos);
-        usuario.setConvites(convites);
-        usuarioAlvo.setAmigos(amigosAlvo);
-        usuarioAlvo.setConvites(convitesAlvo);
+        usuario.adicionarAmigo(usuarioAlvo);
     }
 
     /**
@@ -96,7 +66,7 @@ public class AmizadeService {
      */
     public boolean ehAmigo(String login, String amigo) throws UsuarioNaoCadastradoException {
         Usuario usuario = usuarioRepository.buscarUsuario(login);
-        return usuario.getAmigos().contains(amigo);
+        return usuario.ehAmigoDe(amigo);
     }
 
     /**
@@ -108,6 +78,6 @@ public class AmizadeService {
      */
     public String getAmigos(String login) throws UsuarioNaoCadastradoException {
         Usuario usuario = usuarioRepository.buscarUsuario(login);
-        return "{" + String.join(",", usuario.getAmigos()) + "}";
+        return usuario.listarAmigos();
     }
 }

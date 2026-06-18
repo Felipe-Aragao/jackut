@@ -51,6 +51,6 @@ public class ComunidadeService {
 
     public String getMembrosComunidade(String nome) throws ComunidadeNaoExisteException {
         Comunidade comunidade = comunidadeRepository.buscarComunidade(nome);
-        return "{" + String.join(",", comunidade.getMembros()) + "}";
+        return comunidade.listarMembros();
     }
 }

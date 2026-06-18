@@ -50,4 +50,8 @@ public class Comunidade {
     public void setMembros(Set<String> membros) {
         this.membros = new LinkedHashSet<>(membros);
     }
+
+    public String listarMembros() {
+        return "{" + String.join(",", membros) + "}";
+    }
 }
