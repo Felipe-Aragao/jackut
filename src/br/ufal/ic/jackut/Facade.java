@@ -1,16 +1,14 @@
 package br.ufal.ic.jackut;
 
 import br.ufal.ic.jackut.exception.*;
+import br.ufal.ic.jackut.repository.ComunidadeRepository;
 import br.ufal.ic.jackut.repository.SessaoRepository;
 import br.ufal.ic.jackut.repository.UsuarioRepository;
-import br.ufal.ic.jackut.service.AmizadeService;
-import br.ufal.ic.jackut.service.RecadoService;
-import br.ufal.ic.jackut.service.SessaoService;
-import br.ufal.ic.jackut.service.UsuarioService;
+import br.ufal.ic.jackut.service.*;
 
 /**
- * Facade que expõe a API pública do sistema para uso em testes.
- * Agrupa os serviços de usuário e sessão e delega operações a eles.
+ * Facade que expoe a API publica do sistema para uso em testes.
+ * Agrupa os servicos e delega operacoes a eles.
  */
 public class Facade {
 
@@ -18,8 +16,10 @@ public class Facade {
     private final SessaoService sessaoService;
     private final AmizadeService amizadeService;
     private final RecadoService recadoService;
+    private final ComunidadeService comunidadeService;
     UsuarioRepository usuarioRepository;
     SessaoRepository sessaoRepository;
+    ComunidadeRepository comunidadeRepository;
 
     /**
      * Inicializa a fachada com os repositórios e serviços usados pelo sistema.
@@ -27,10 +27,12 @@ public class Facade {
     public Facade() {
         this.usuarioRepository = new UsuarioRepository();
         this.sessaoRepository = new SessaoRepository();
+        this.comunidadeRepository = new ComunidadeRepository();
         this.usuarioService = new UsuarioService(usuarioRepository, sessaoRepository);
         this.sessaoService = new SessaoService(usuarioRepository, sessaoRepository);
         this.amizadeService = new AmizadeService(usuarioRepository, sessaoRepository);
         this.recadoService = new RecadoService(usuarioRepository, sessaoRepository);
+        this.comunidadeService = new ComunidadeService(usuarioRepository, sessaoRepository, comunidadeRepository);
     }
 
     // Sistema
@@ -42,6 +44,8 @@ public class Facade {
     public void zerarSistema(){
         usuarioRepository.limpar();
         usuarioRepository.apagarPersistencia();
+        comunidadeRepository.limpar();
+        comunidadeRepository.apagarPersistencia();
         sessaoRepository.limpar();
     }
 
@@ -50,6 +54,7 @@ public class Facade {
      */
     public void encerrarSistema(){
         usuarioRepository.save();
+        comunidadeRepository.save();
     }
 
     // Usuario
@@ -82,7 +87,7 @@ public class Facade {
         usuarioService.criarUsuario(login, senha, nome);
     }
 
-    //Sessão
+    // Sessao
 
     /**
      * Abre uma sessão para o usuário com `login` e `senha`.
@@ -109,6 +114,8 @@ public class Facade {
             throws UsuarioNaoCadastradoException {
         usuarioService.editarPerfil(id, atributo, valor);
     }
+
+    //Amizades
 
     /**
      * Envia um pedido de amizade do usuário identificado pela sessão `id`
@@ -152,6 +159,8 @@ public class Facade {
         return amizadeService.getAmigos(login);
     }
 
+    // Recado
+
     /**
      * Encaminha um recado a partir da sessão `id` para `destinatario`.
      * @param id id da sessão do remetente
@@ -175,5 +184,24 @@ public class Facade {
     public String lerRecado(String id)
             throws UsuarioNaoCadastradoException, NaoHaRecadosException {
         return  recadoService.lerRecado(id);
+    }
+
+    // Comunidade
+
+    public void criarComunidade(String id, String nome, String descricao)
+            throws UsuarioNaoCadastradoException, ComunidadeJaExisteException {
+        comunidadeService.criarComunidade(id, nome, descricao);
+    }
+
+    public String getDescricaoComunidade(String nome) throws ComunidadeNaoExisteException {
+        return comunidadeService.getDescricaoComunidade(nome);
+    }
+
+    public String getDonoComunidade(String nome) throws ComunidadeNaoExisteException {
+        return comunidadeService.getDonoComunidade(nome);
+    }
+
+    public String getMembrosComunidade(String nome) throws ComunidadeNaoExisteException {
+        return comunidadeService.getMembrosComunidade(nome);
     }
 }
