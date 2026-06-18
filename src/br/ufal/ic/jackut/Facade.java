@@ -2,6 +2,7 @@ package br.ufal.ic.jackut;
 
 import br.ufal.ic.jackut.exception.*;
 import br.ufal.ic.jackut.repository.ComunidadeRepository;
+import br.ufal.ic.jackut.repository.ParticipacaoComunidadeRepository;
 import br.ufal.ic.jackut.repository.SessaoRepository;
 import br.ufal.ic.jackut.repository.UsuarioRepository;
 import br.ufal.ic.jackut.service.*;
@@ -20,6 +21,7 @@ public class Facade {
     UsuarioRepository usuarioRepository;
     SessaoRepository sessaoRepository;
     ComunidadeRepository comunidadeRepository;
+    ParticipacaoComunidadeRepository participacaoComunidadeRepository;
 
     /**
      * Inicializa a fachada com os repositórios e serviços usados pelo sistema.
@@ -28,11 +30,12 @@ public class Facade {
         this.usuarioRepository = new UsuarioRepository();
         this.sessaoRepository = new SessaoRepository();
         this.comunidadeRepository = new ComunidadeRepository();
+        this.participacaoComunidadeRepository = new ParticipacaoComunidadeRepository();
         this.usuarioService = new UsuarioService(usuarioRepository, sessaoRepository);
         this.sessaoService = new SessaoService(usuarioRepository, sessaoRepository);
         this.amizadeService = new AmizadeService(usuarioRepository, sessaoRepository);
         this.recadoService = new RecadoService(usuarioRepository, sessaoRepository);
-        this.comunidadeService = new ComunidadeService(usuarioRepository, sessaoRepository, comunidadeRepository);
+        this.comunidadeService = new ComunidadeService(usuarioRepository, sessaoRepository, comunidadeRepository, participacaoComunidadeRepository);
     }
 
     // Sistema
@@ -46,6 +49,8 @@ public class Facade {
         usuarioRepository.apagarPersistencia();
         comunidadeRepository.limpar();
         comunidadeRepository.apagarPersistencia();
+        participacaoComunidadeRepository.limpar();
+        participacaoComunidadeRepository.apagarPersistencia();
         sessaoRepository.limpar();
     }
 
@@ -55,6 +60,7 @@ public class Facade {
     public void encerrarSistema(){
         usuarioRepository.save();
         comunidadeRepository.save();
+        participacaoComunidadeRepository.save();
     }
 
     // Usuario
@@ -203,5 +209,15 @@ public class Facade {
 
     public String getMembrosComunidade(String nome) throws ComunidadeNaoExisteException {
         return comunidadeService.getMembrosComunidade(nome);
+    }
+
+    public String getComunidades(String login) throws UsuarioNaoCadastradoException {
+        return comunidadeService.getComunidades(login);
+    }
+
+    public void adicionarComunidade(String id, String nome)
+            throws UsuarioNaoCadastradoException, ComunidadeNaoExisteException,
+            UsuarioJaFazParteDaComunidadeException {
+        comunidadeService.adicionarComunidade(id, nome);
     }
 }

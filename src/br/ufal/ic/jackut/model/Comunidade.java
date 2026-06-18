@@ -8,13 +8,11 @@ public class Comunidade {
     private String nome;
     private String descricao;
     private String dono;
-    private Set<String> membros = new LinkedHashSet<>();
 
     public Comunidade(String dono, String nome, String descricao) {
         this.dono = dono;
         this.nome = nome;
         this.descricao = descricao;
-        this.membros.add(dono);
     }
 
     public Comunidade(){}
@@ -44,14 +42,10 @@ public class Comunidade {
     }
 
     public Set<String> getMembros() {
-        return new LinkedHashSet<>(membros);
+        return new LinkedHashSet<>();
     }
 
     public void setMembros(Set<String> membros) {
-        this.membros = new LinkedHashSet<>(membros);
-    }
-
-    public String listarMembros() {
-        return "{" + String.join(",", membros) + "}";
+        // Compatibilidade com XML antigo; a fonte atual e ParticipacaoComunidadeRepository.
     }
 }
