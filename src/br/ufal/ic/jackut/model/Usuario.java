@@ -1,10 +1,7 @@
 package br.ufal.ic.jackut.model;
 
-import br.ufal.ic.jackut.exception.EsperandoAceitacaoDoConviteException;
-import br.ufal.ic.jackut.exception.NaoHaRecadosException;
 import br.ufal.ic.jackut.exception.NaoHaMensagensException;
-import br.ufal.ic.jackut.exception.UsuarioJaEstaAdicionadoComoAmigoException;
-import br.ufal.ic.jackut.exception.UsuarioNaoPodeSeAutoAdicionarException;
+import br.ufal.ic.jackut.exception.NaoHaRecadosException;
 import br.ufal.ic.jackut.exception.UsuarioNaoPodeSeAutoEnviarMensagemException;
 
 import java.util.*;
@@ -15,14 +12,19 @@ import java.util.*;
  */
 public class Usuario {
 
+    public static final String REL_AMIGOS = "amigos";
+    public static final String REL_CONVITES = "convites";
+    public static final String REL_IDOLOS = "idolos";
+    public static final String REL_FAS = "fas";
+    public static final String REL_PAQUERAS = "paqueras";
+    public static final String REL_INIMIGOS = "inimigos";
+
     private String login;
     private String senha;
 
     private Map<String, String> atributos = new HashMap<>();
+    private Map<String, Set<String>> relacionamentos = new HashMap<>();
 
-    private Set<String> amigos = new LinkedHashSet<>();
-    private Set<String> convites = new LinkedHashSet<>();
-    
     private List<Recado> recados = new ArrayList<>();
     private List<String> mensagens = new ArrayList<>();
 
@@ -100,12 +102,44 @@ public class Usuario {
     }
 
     /**
+     * Retorna uma cópia do mapa de relacionamentos do usuário.
+     *
+     * @return mapa de relacionamentos
+     */
+    public Map<String, Set<String>> getRelacionamentos() {
+        Map<String, Set<String>> copia = new HashMap<>();
+
+        for (Map.Entry<String, Set<String>> entrada : getMapaRelacionamentos().entrySet()) {
+            copia.put(entrada.getKey(), new LinkedHashSet<>(entrada.getValue()));
+        }
+
+        return copia;
+    }
+
+    /**
+     * Substitui o mapa de relacionamentos do usuário.
+     *
+     * @param relacionamentos novo mapa de relacionamentos
+     */
+    public void setRelacionamentos(Map<String, Set<String>> relacionamentos) {
+        this.relacionamentos = new HashMap<>();
+
+        if (relacionamentos == null) {
+            return;
+        }
+
+        for (Map.Entry<String, Set<String>> entrada : relacionamentos.entrySet()) {
+            this.relacionamentos.put(entrada.getKey(), new LinkedHashSet<>(entrada.getValue()));
+        }
+    }
+
+    /**
      * Retorna uma cópia da coleção de amigos.
      *
      * @return cópia dos amigos
      */
     public Set<String> getAmigos() {
-        return new LinkedHashSet<>(amigos);
+        return getRelacionamentos(REL_AMIGOS);
     }
 
     /**
@@ -114,40 +148,68 @@ public class Usuario {
      * @param amigos nova coleção de amigos
      */
     public void setAmigos(Set<String> amigos) {
-        this.amigos = new LinkedHashSet<>(amigos);
+        setRelacionamentos(REL_AMIGOS, amigos);
     }
 
     /**
-     * Executa a regra de envio e aceitação de convites de amizade.
+     * Retorna uma cópia da coleção de um tipo de relacionamento.
      *
-     * @param usuarioAlvo usuário que receberá o convite ou será aceito como amigo
-     * @throws UsuarioNaoPodeSeAutoAdicionarException se o usuário tentar adicionar a si mesmo
-     * @throws UsuarioJaEstaAdicionadoComoAmigoException se os usuários já forem amigos
-     * @throws EsperandoAceitacaoDoConviteException se já houver convite pendente para o usuário alvo
+     * @param tipo tipo de relacionamento
+     * @return relacionamentos do tipo informado
      */
-    public void adicionarAmigo(Usuario usuarioAlvo)
-            throws UsuarioNaoPodeSeAutoAdicionarException, UsuarioJaEstaAdicionadoComoAmigoException,
-            EsperandoAceitacaoDoConviteException {
-        if (this.login.equals(usuarioAlvo.login)) {
-            throw new UsuarioNaoPodeSeAutoAdicionarException();
-        }
+    public Set<String> getRelacionamentos(String tipo) {
+        return new LinkedHashSet<>(colecaoRelacionamentos(tipo));
+    }
 
-        if (this.amigos.contains(usuarioAlvo.login) || usuarioAlvo.amigos.contains(this.login)) {
-            throw new UsuarioJaEstaAdicionadoComoAmigoException();
-        }
+    /**
+     * Substitui a coleção de um tipo de relacionamento.
+     *
+     * @param tipo tipo de relacionamento
+     * @param valores novos valores
+     */
+    public void setRelacionamentos(String tipo, Set<String> valores) {
+        getMapaRelacionamentos().put(tipo, new LinkedHashSet<>(valores));
+    }
 
-        if (this.convites.contains(usuarioAlvo.login)) {
-            this.amigos.add(usuarioAlvo.login);
-            usuarioAlvo.amigos.add(this.login);
-            this.convites.remove(usuarioAlvo.login);
-            return;
-        }
+    /**
+     * Adiciona um login ao tipo de relacionamento informado.
+     *
+     * @param tipo tipo de relacionamento
+     * @param login login relacionado
+     */
+    public void adicionarRelacionamento(String tipo, String login) {
+        colecaoRelacionamentos(tipo).add(login);
+    }
 
-        if (usuarioAlvo.convites.contains(this.login)) {
-            throw new EsperandoAceitacaoDoConviteException();
-        }
+    /**
+     * Verifica se um login pertence ao tipo de relacionamento informado.
+     *
+     * @param tipo tipo de relacionamento
+     * @param login login a ser consultado
+     * @return true se o relacionamento existir
+     */
+    public boolean temRelacionamento(String tipo, String login) {
+        return colecaoRelacionamentos(tipo).contains(login);
+    }
 
-        usuarioAlvo.convites.add(this.login);
+    /**
+     * Remove um login do tipo de relacionamento informado.
+     *
+     * @param tipo tipo de relacionamento
+     * @param login login a remover
+     */
+    public void removerRelacionamento(String tipo, String login) {
+        colecaoRelacionamentos(tipo).remove(login);
+    }
+
+    /**
+     * Lista um tipo de relacionamento no formato esperado pela fachada.
+     *
+     * @param tipo tipo de relacionamento
+     * @return relacionamentos no formato {login1,login2}
+     */
+    public String listarRelacionamentos(String tipo) {
+        return "{" + String.join(",", colecaoRelacionamentos(tipo)) + "}";
     }
 
     /**
@@ -157,7 +219,7 @@ public class Usuario {
      * @return true se o login for amigo, false caso contrário
      */
     public boolean ehAmigoDe(String login) {
-        return amigos.contains(login);
+        return temRelacionamento(REL_AMIGOS, login);
     }
 
     /**
@@ -166,7 +228,7 @@ public class Usuario {
      * @return amigos no formato {login1,login2}
      */
     public String listarAmigos() {
-        return "{" + String.join(",", amigos) + "}";
+        return listarRelacionamentos(REL_AMIGOS);
     }
 
     /**
@@ -175,7 +237,7 @@ public class Usuario {
      * @return cópia dos convites
      */
     public Set<String> getConvites() {
-        return new LinkedHashSet<>(convites);
+        return getRelacionamentos(REL_CONVITES);
     }
 
     /**
@@ -184,7 +246,7 @@ public class Usuario {
      * @param convites nova coleção de convites
      */
     public void setConvites(Set<String> convites) {
-        this.convites = new LinkedHashSet<>(convites);
+        setRelacionamentos(REL_CONVITES, convites);
     }
 
     /**
@@ -251,6 +313,30 @@ public class Usuario {
         }
 
         return mensagens.remove(0);
+    }
+
+    public void receberRecadoDoSistema(String mensagem) {
+        receberRecado(new Recado("Jackut", login, mensagem));
+    }
+
+    private Map<String, Set<String>> getMapaRelacionamentos() {
+        if (relacionamentos == null) {
+            relacionamentos = new HashMap<>();
+        }
+
+        return relacionamentos;
+    }
+
+    private Set<String> colecaoRelacionamentos(String tipo) {
+        Map<String, Set<String>> mapa = getMapaRelacionamentos();
+        Set<String> valores = mapa.get(tipo);
+
+        if (valores == null) {
+            valores = new LinkedHashSet<>();
+            mapa.put(tipo, valores);
+        }
+
+        return valores;
     }
 
     private void receberRecado(Recado recado) {

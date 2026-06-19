@@ -15,7 +15,7 @@ public class Facade {
 
     private final UsuarioService usuarioService;
     private final SessaoService sessaoService;
-    private final AmizadeService amizadeService;
+    private final RelacionamentoService relacionamentoService;
     private final RecadoService recadoService;
     private final MensagemService mensagemService;
     private final ComunidadeService comunidadeService;
@@ -34,7 +34,7 @@ public class Facade {
         this.participacaoComunidadeRepository = new ParticipacaoComunidadeRepository();
         this.usuarioService = new UsuarioService(usuarioRepository, sessaoRepository);
         this.sessaoService = new SessaoService(usuarioRepository, sessaoRepository);
-        this.amizadeService = new AmizadeService(usuarioRepository, sessaoRepository);
+        this.relacionamentoService = new RelacionamentoService(usuarioRepository, sessaoRepository);
         this.recadoService = new RecadoService(usuarioRepository, sessaoRepository);
         this.mensagemService = new MensagemService(usuarioRepository, sessaoRepository, comunidadeRepository, participacaoComunidadeRepository);
         this.comunidadeService = new ComunidadeService(usuarioRepository, sessaoRepository, comunidadeRepository, participacaoComunidadeRepository);
@@ -139,8 +139,9 @@ public class Facade {
      */
     public void adicionarAmigo(String id, String amigo)
             throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoAmigoException,
-            EsperandoAceitacaoDoConviteException, UsuarioNaoPodeSeAutoAdicionarException {
-        amizadeService.adicionarAmigo(id, amigo);
+            EsperandoAceitacaoDoConviteException, UsuarioNaoPodeSeAutoAdicionarException,
+            FuncaoInvalidaUsuarioInimigoException {
+        relacionamentoService.adicionarAmigo(id, amigo);
     }
 
     /**
@@ -153,7 +154,7 @@ public class Facade {
      */
     public boolean ehAmigo(String login ,String amigo)
             throws UsuarioNaoCadastradoException {
-        return amizadeService.ehAmigo(login, amigo);
+        return relacionamentoService.ehAmigo(login, amigo);
     }
 
     /**
@@ -164,9 +165,44 @@ public class Facade {
      * @throws UsuarioNaoCadastradoException se o usuário não existir
      */
     public String getAmigos(String login) throws UsuarioNaoCadastradoException {
-        return amizadeService.getAmigos(login);
+        return relacionamentoService.getAmigos(login);
     }
 
+    // Relacionamentos
+
+    public void adicionarIdolo(String id, String idolo)
+            throws UsuarioNaoCadastradoException, FuncaoInvalidaUsuarioInimigoException,
+            UsuarioJaEstaAdicionadoComoIdoloException, UsuarioNaoPodeSerFaDeSiMesmoException {
+        relacionamentoService.adicionarIdolo(id, idolo);
+    }
+
+    public boolean ehFa(String login, String idolo) throws UsuarioNaoCadastradoException {
+        return relacionamentoService.ehFa(login, idolo);
+    }
+
+    public String getFas(String login) throws UsuarioNaoCadastradoException {
+        return relacionamentoService.getFas(login);
+    }
+
+    public void adicionarPaquera(String id, String paquera)
+            throws UsuarioNaoCadastradoException, FuncaoInvalidaUsuarioInimigoException,
+            UsuarioJaEstaAdicionadoComoPaqueraException, UsuarioNaoPodeSerPaqueraDeSiMesmoException {
+        relacionamentoService.adicionarPaquera(id, paquera);
+    }
+
+    public boolean ehPaquera(String id, String paquera) throws UsuarioNaoCadastradoException {
+        return relacionamentoService.ehPaquera(id, paquera);
+    }
+
+    public String getPaqueras(String id) throws UsuarioNaoCadastradoException {
+        return relacionamentoService.getPaqueras(id);
+    }
+
+    public void adicionarInimigo(String id, String inimigo)
+            throws UsuarioNaoCadastradoException, UsuarioJaEstaAdicionadoComoInimigoException,
+            UsuarioNaoPodeSerInimigoDeSiMesmoException {
+        relacionamentoService.adicionarInimigo(id, inimigo);
+    }
     // Recado
 
     /**
@@ -178,7 +214,8 @@ public class Facade {
      * @throws UsuarioNaoPodeSeAutoEnviarMensagemException se tentar enviar recado para si
      */
     public void enviarRecado(String id , String destinatario, String mensagem)
-            throws UsuarioNaoCadastradoException, UsuarioNaoPodeSeAutoEnviarMensagemException {
+            throws UsuarioNaoCadastradoException, UsuarioNaoPodeSeAutoEnviarMensagemException,
+            FuncaoInvalidaUsuarioInimigoException {
         recadoService.enviarRecado(id, destinatario, mensagem);
     }
 

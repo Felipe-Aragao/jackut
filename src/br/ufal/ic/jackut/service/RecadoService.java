@@ -1,5 +1,6 @@
 package br.ufal.ic.jackut.service;
 
+import br.ufal.ic.jackut.exception.FuncaoInvalidaUsuarioInimigoException;
 import br.ufal.ic.jackut.exception.NaoHaRecadosException;
 import br.ufal.ic.jackut.exception.UsuarioNaoCadastradoException;
 import br.ufal.ic.jackut.exception.UsuarioNaoPodeSeAutoEnviarMensagemException;
@@ -36,9 +37,11 @@ public class RecadoService {
      * @param mensagem texto do recado
      * @throws UsuarioNaoCadastradoException se a sessão for inválida ou o destinatário não existir
      * @throws UsuarioNaoPodeSeAutoEnviarMensagemException se o remetente for o mesmo do destinatário
+     * @throws FuncaoInvalidaUsuarioInimigoException se o destinatário marcou o remetente como inimigo
      */
     public void enviarRecado(String id, String destinatario, String mensagem)
-            throws UsuarioNaoCadastradoException, UsuarioNaoPodeSeAutoEnviarMensagemException {
+            throws UsuarioNaoCadastradoException, UsuarioNaoPodeSeAutoEnviarMensagemException,
+            FuncaoInvalidaUsuarioInimigoException {
         Sessao sessao = sessaoRepository.buscarSessao(id);
 
         if (sessao == null) {
@@ -47,6 +50,10 @@ public class RecadoService {
 
         Usuario usuarioRemetente = sessao.getUsuario();
         Usuario usuarioDestinatario = usuarioRepository.buscarUsuario(destinatario);
+
+        if (usuarioDestinatario.temRelacionamento(Usuario.REL_INIMIGOS, usuarioRemetente.getLogin())) {
+            throw new FuncaoInvalidaUsuarioInimigoException(usuarioDestinatario.getAtributo("nome"));
+        }
 
         usuarioRemetente.enviarRecadoPara(usuarioDestinatario, mensagem);
     }
