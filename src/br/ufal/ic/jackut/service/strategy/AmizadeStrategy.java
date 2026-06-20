@@ -12,6 +12,10 @@ import br.ufal.ic.jackut.model.Usuario;
 public class AmizadeStrategy extends AbstractRelacionamentoStrategy {
 
     /**
+     * Inicializa a estratégia de amizade.
+     */
+    public AmizadeStrategy() {}
+    /**
      * Adiciona uma amizade ou cria um convite pendente entre dois usuários.
      *
      * @param origem usuário que inicia o pedido de amizade

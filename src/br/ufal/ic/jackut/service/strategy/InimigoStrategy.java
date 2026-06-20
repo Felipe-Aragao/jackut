@@ -10,6 +10,10 @@ import br.ufal.ic.jackut.model.Usuario;
 public class InimigoStrategy extends AbstractRelacionamentoStrategy {
 
     /**
+     * Inicializa a estratégia de inimizade.
+     */
+    public InimigoStrategy() {}
+    /**
      * Adiciona o alvo como inimigo da origem.
      *
      * @param origem usuário que adiciona o inimigo

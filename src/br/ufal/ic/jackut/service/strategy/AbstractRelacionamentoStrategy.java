@@ -10,6 +10,10 @@ import br.ufal.ic.jackut.model.Usuario;
 public abstract class AbstractRelacionamentoStrategy implements RelacionamentoStrategy {
 
     /**
+     * Inicializa a estratégia base de relacionamento.
+     */
+    protected AbstractRelacionamentoStrategy() {}
+    /**
      * Valida se o usuário de origem não está tentando se relacionar consigo mesmo.
      *
      * @param origem usuário que inicia o relacionamento

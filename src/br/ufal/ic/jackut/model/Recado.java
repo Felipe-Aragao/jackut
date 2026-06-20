@@ -26,32 +26,56 @@ public class Recado {
      * Construtor vazio para XMl*/
     public Recado(){}
 
-    /** Retorna o login do remetente. */
+    /**
+     * Retorna o login do remetente.
+     *
+     * @return login do remetente
+     */
     public String getRemetente() {
         return remetente;
     }
 
-    /** Define o login do remetente. */
+    /**
+     * Define o login do remetente.
+     *
+     * @param remetente login do remetente
+     */
     public void setRemetente(String remetente) {
         this.remetente = remetente;
     }
 
-    /** Retorna o login do destinatário. */
+    /**
+     * Retorna o login do destinatário.
+     *
+     * @return login do destinatário
+     */
     public String getDestinatario() {
         return destinatario;
     }
 
-    /** Define o login do destinatário. */
+    /**
+     * Define o login do destinatário.
+     *
+     * @param destinatario login do destinatário
+     */
     public void setDestinatario(String destinatario) {
         this.destinatario = destinatario;
     }
 
-    /** Retorna o texto do recado. */
+    /**
+     * Retorna o texto do recado.
+     *
+     * @return texto do recado
+     */
     public String getMensagem() {
         return mensagem;
     }
 
-    /** Define o texto do recado. */
+    /**
+     * Define o texto do recado.
+     *
+     * @param mensagem texto do recado
+     */
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }

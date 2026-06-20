@@ -8,7 +8,13 @@ import easyaccept.EasyAccept;
  */
 public class Main {
     /**
+     * Impede a instanciação da classe utilitária de entrada.
+     */
+    private Main() {}
+    /**
      * Ponto de entrada que executa os scripts de teste EasyAccept.
+     *
+     * @param args argumentos de linha de comando
      */
     public static void main(String[] args) {
         EasyAccept.main(new String[] {"br.ufal.ic.jackut.Facade", "tests/us1_1.txt"});

@@ -11,6 +11,10 @@ import br.ufal.ic.jackut.model.Usuario;
 public class IdoloStrategy extends AbstractRelacionamentoStrategy {
 
     /**
+     * Inicializa a estratégia de ídolos e fãs.
+     */
+    public IdoloStrategy() {}
+    /**
      * Adiciona o alvo como ídolo da origem e registra a origem como fã do alvo.
      *
      * @param origem usuário que será fã

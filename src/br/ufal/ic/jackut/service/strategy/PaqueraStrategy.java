@@ -11,6 +11,10 @@ import br.ufal.ic.jackut.model.Usuario;
 public class PaqueraStrategy extends AbstractRelacionamentoStrategy {
 
     /**
+     * Inicializa a estratégia de paquera.
+     */
+    public PaqueraStrategy() {}
+    /**
      * Adiciona o alvo como paquera da origem.
      *
      * @param origem usuário que adiciona a paquera

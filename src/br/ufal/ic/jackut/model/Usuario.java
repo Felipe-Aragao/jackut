@@ -12,11 +12,17 @@ import java.util.*;
  */
 public class Usuario {
 
+    /** Tipo de relacionamento para amigos. */
     public static final String REL_AMIGOS = "amigos";
+    /** Tipo de relacionamento para convites de amizade. */
     public static final String REL_CONVITES = "convites";
+    /** Tipo de relacionamento para ídolos. */
     public static final String REL_IDOLOS = "idolos";
+    /** Tipo de relacionamento para fãs. */
     public static final String REL_FAS = "fas";
+    /** Tipo de relacionamento para paqueras. */
     public static final String REL_PAQUERAS = "paqueras";
+    /** Tipo de relacionamento para inimigos. */
     public static final String REL_INIMIGOS = "inimigos";
 
     private String login;

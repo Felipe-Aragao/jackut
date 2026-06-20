@@ -8,6 +8,10 @@ import br.ufal.ic.jackut.model.Usuario;
 public class PaqueraMutuaObserver implements PaqueraObserver {
 
     /**
+     * Inicializa o observador de paquera mútua.
+     */
+    public PaqueraMutuaObserver() {}
+    /**
      * Envia recados do sistema quando origem e alvo se paqueram mutuamente.
      *
      * @param origem usuário que adicionou a paquera
