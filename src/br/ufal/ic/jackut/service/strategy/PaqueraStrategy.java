@@ -5,8 +5,20 @@ import br.ufal.ic.jackut.exception.UsuarioJaEstaAdicionadoComoPaqueraException;
 import br.ufal.ic.jackut.exception.UsuarioNaoPodeSerPaqueraDeSiMesmoException;
 import br.ufal.ic.jackut.model.Usuario;
 
+/**
+ * Estratégia que aplica as regras de paquera entre usuários.
+ */
 public class PaqueraStrategy extends AbstractRelacionamentoStrategy {
 
+    /**
+     * Adiciona o alvo como paquera da origem.
+     *
+     * @param origem usuário que adiciona a paquera
+     * @param alvo usuário marcado como paquera
+     * @throws FuncaoInvalidaUsuarioInimigoException se o alvo marcou a origem como inimiga
+     * @throws UsuarioJaEstaAdicionadoComoPaqueraException se a paquera já estiver adicionada
+     * @throws UsuarioNaoPodeSerPaqueraDeSiMesmoException se origem e alvo forem o mesmo usuário
+     */
     @Override
     public void adicionar(Usuario origem, Usuario alvo)
             throws FuncaoInvalidaUsuarioInimigoException, UsuarioJaEstaAdicionadoComoPaqueraException,

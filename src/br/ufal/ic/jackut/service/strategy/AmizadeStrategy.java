@@ -6,8 +6,21 @@ import br.ufal.ic.jackut.exception.UsuarioJaEstaAdicionadoComoAmigoException;
 import br.ufal.ic.jackut.exception.UsuarioNaoPodeSeAutoAdicionarException;
 import br.ufal.ic.jackut.model.Usuario;
 
+/**
+ * Estratégia que aplica as regras de amizade e convites entre usuários.
+ */
 public class AmizadeStrategy extends AbstractRelacionamentoStrategy {
 
+    /**
+     * Adiciona uma amizade ou cria um convite pendente entre dois usuários.
+     *
+     * @param origem usuário que inicia o pedido de amizade
+     * @param alvo usuário alvo do pedido de amizade
+     * @throws FuncaoInvalidaUsuarioInimigoException se o alvo marcou a origem como inimiga
+     * @throws UsuarioNaoPodeSeAutoAdicionarException se origem e alvo forem o mesmo usuário
+     * @throws UsuarioJaEstaAdicionadoComoAmigoException se a amizade já existir
+     * @throws EsperandoAceitacaoDoConviteException se já houver convite pendente para a origem
+     */
     @Override
     public void adicionar(Usuario origem, Usuario alvo)
             throws FuncaoInvalidaUsuarioInimigoException, UsuarioNaoPodeSeAutoAdicionarException,

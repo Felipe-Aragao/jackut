@@ -12,6 +12,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Serviço responsável pela remoção de usuários e dados relacionados.
+ */
 public class RemocaoUsuarioService {
 
     private final UsuarioRepository usuarioRepository;
@@ -19,6 +22,14 @@ public class RemocaoUsuarioService {
     private final ComunidadeRepository comunidadeRepository;
     private final ParticipacaoComunidadeRepository participacaoComunidadeRepository;
 
+    /**
+     * Cria o serviço com os repositórios necessários para remoção de usuários.
+     *
+     * @param usuarioRepository repositório de usuários
+     * @param sessaoRepository repositório de sessões
+     * @param comunidadeRepository repositório de comunidades
+     * @param participacaoComunidadeRepository repositório de participações em comunidades
+     */
     public RemocaoUsuarioService(UsuarioRepository usuarioRepository,
                                  SessaoRepository sessaoRepository,
                                  ComunidadeRepository comunidadeRepository,
@@ -29,6 +40,12 @@ public class RemocaoUsuarioService {
         this.participacaoComunidadeRepository = participacaoComunidadeRepository;
     }
 
+    /**
+     * Remove o usuário associado à sessão informada e limpa seus vínculos.
+     *
+     * @param id id da sessão do usuário a remover
+     * @throws UsuarioNaoCadastradoException se a sessão não existir ou o usuário não estiver cadastrado
+     */
     public void removerUsuario(String id) throws UsuarioNaoCadastradoException {
         Sessao sessao = sessaoRepository.buscarSessao(id);
 
