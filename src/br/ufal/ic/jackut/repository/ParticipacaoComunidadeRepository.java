@@ -4,6 +4,7 @@ import br.ufal.ic.jackut.model.ParticipacaoComunidade;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ParticipacaoComunidadeRepository {
 
@@ -50,6 +51,30 @@ public class ParticipacaoComunidadeRepository {
             }
         }
         return membros;
+    }
+
+    public void removerPorLogin(String login) {
+        List<ParticipacaoComunidade> participacoesRemovidas = new ArrayList<>();
+
+        for (ParticipacaoComunidade participacao : participacoes) {
+            if (login.equals(participacao.getLogin())) {
+                participacoesRemovidas.add(participacao);
+            }
+        }
+
+        participacoes.removeAll(participacoesRemovidas);
+    }
+
+    public void removerPorComunidades(Set<String> comunidades) {
+        List<ParticipacaoComunidade> participacoesRemovidas = new ArrayList<>();
+
+        for (ParticipacaoComunidade participacao : participacoes) {
+            if (comunidades.contains(participacao.getComunidade())) {
+                participacoesRemovidas.add(participacao);
+            }
+        }
+
+        participacoes.removeAll(participacoesRemovidas);
     }
 
     public void limpar() {

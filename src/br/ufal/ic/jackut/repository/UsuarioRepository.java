@@ -39,6 +39,14 @@ public class UsuarioRepository {
         usuarios.put(usuario.getLogin(), usuario);
     }
 
+    public void removerUsuario(String login) throws UsuarioNaoCadastradoException {
+        if (!usuarios.containsKey(login)) {
+            throw new UsuarioNaoCadastradoException();
+        }
+
+        usuarios.remove(login);
+    }
+
     /**
      * Remove todos os usuários mantidos em memória.
      */

@@ -2,7 +2,9 @@ package br.ufal.ic.jackut.repository;
 
 import br.ufal.ic.jackut.model.Sessao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,6 +38,21 @@ public class SessaoRepository {
      */
     public Sessao buscarSessao(String id) {
         return sessoes.get(id);
+    }
+
+    public void removerSessoesDoUsuario(String login) {
+        List<String> idsRemovidos = new ArrayList<>();
+
+        for (Map.Entry<String, Sessao> entrada : sessoes.entrySet()) {
+            Sessao sessao = entrada.getValue();
+            if (sessao.getUsuario() != null && login.equals(sessao.getUsuario().getLogin())) {
+                idsRemovidos.add(entrada.getKey());
+            }
+        }
+
+        for (String id : idsRemovidos) {
+            sessoes.remove(id);
+        }
     }
 
     /**

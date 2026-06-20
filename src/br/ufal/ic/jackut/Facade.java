@@ -19,6 +19,7 @@ public class Facade {
     private final RecadoService recadoService;
     private final MensagemService mensagemService;
     private final ComunidadeService comunidadeService;
+    private final RemocaoUsuarioService remocaoUsuarioService;
     UsuarioRepository usuarioRepository;
     SessaoRepository sessaoRepository;
     ComunidadeRepository comunidadeRepository;
@@ -38,6 +39,7 @@ public class Facade {
         this.recadoService = new RecadoService(usuarioRepository, sessaoRepository);
         this.mensagemService = new MensagemService(usuarioRepository, sessaoRepository, comunidadeRepository, participacaoComunidadeRepository);
         this.comunidadeService = new ComunidadeService(usuarioRepository, sessaoRepository, comunidadeRepository, participacaoComunidadeRepository);
+        this.remocaoUsuarioService = new RemocaoUsuarioService(usuarioRepository, sessaoRepository, comunidadeRepository, participacaoComunidadeRepository);
     }
 
     // Sistema
@@ -121,6 +123,10 @@ public class Facade {
     public void editarPerfil(String id, String atributo, String valor)
             throws UsuarioNaoCadastradoException {
         usuarioService.editarPerfil(id, atributo, valor);
+    }
+
+    public void removerUsuario(String id) throws UsuarioNaoCadastradoException {
+        remocaoUsuarioService.removerUsuario(id);
     }
 
     //Amizades

@@ -3,7 +3,9 @@ package br.ufal.ic.jackut.repository;
 import br.ufal.ic.jackut.exception.ComunidadeNaoExisteException;
 import br.ufal.ic.jackut.model.Comunidade;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ComunidadeRepository {
@@ -26,6 +28,22 @@ public class ComunidadeRepository {
 
     public boolean existeComunidade(String nome) {
         return comunidades.containsKey(nome);
+    }
+
+    public void removerComunidade(String nome) {
+        comunidades.remove(nome);
+    }
+
+    public List<String> listarComunidadesDoDono(String loginDono) {
+        List<String> nomes = new ArrayList<>();
+
+        for (Comunidade comunidade : comunidades.values()) {
+            if (loginDono.equals(comunidade.getDono())) {
+                nomes.add(comunidade.getNome());
+            }
+        }
+
+        return nomes;
     }
 
     public void limpar() {

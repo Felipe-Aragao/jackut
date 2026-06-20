@@ -26,7 +26,7 @@ public class Usuario {
     private Map<String, Set<String>> relacionamentos = new HashMap<>();
 
     private List<Recado> recados = new ArrayList<>();
-    private List<String> mensagens = new ArrayList<>();
+    private List<Mensagem> mensagens = new ArrayList<>();
 
     /**
      * Cria um usuário com login, senha e nome (armazenado em atributos).
@@ -203,6 +203,17 @@ public class Usuario {
     }
 
     /**
+     * Remove um login de todos os tipos de relacionamento do usuário.
+     *
+     * @param login login a remover
+     */
+    public void removerRelacionamentosCom(String login) {
+        for (Set<String> relacionamentosDoTipo : getMapaRelacionamentos().values()) {
+            relacionamentosDoTipo.remove(login);
+        }
+    }
+
+    /**
      * Lista um tipo de relacionamento no formato esperado pela fachada.
      *
      * @param tipo tipo de relacionamento
@@ -262,7 +273,23 @@ public class Usuario {
      * @param recados nova lista de recados
      */
     public void setRecados(List<Recado> recados) {
-        this.recados = new ArrayList<>(recados);
+        this.recados = new ArrayList<>();
+
+        if (recados != null) {
+            this.recados.addAll(recados);
+        }
+    }
+    
+    public void removerRecadosEnvolvendo(String login) {
+        List<Recado> recadosRemovidos = new ArrayList<>();
+
+        for (Recado recado : recados) {
+            if (login.equals(recado.getRemetente()) || login.equals(recado.getDestinatario())) {
+                recadosRemovidos.add(recado);
+            }
+        }
+
+        recados.removeAll(recadosRemovidos);
     }
 
     /**
@@ -295,16 +322,32 @@ public class Usuario {
         return recados.remove(0).getMensagem();
     }
 
-    public List<String> getMensagens() {
+    public List<Mensagem> getMensagens() {
         return new ArrayList<>(mensagens);
     }
 
-    public void setMensagens(List<String> mensagens) {
-        this.mensagens = new ArrayList<>(mensagens);
+    public void setMensagens(List<Mensagem> mensagens) {
+        this.mensagens = new ArrayList<>();
+
+        if (mensagens != null) {
+            this.mensagens.addAll(mensagens);
+        }
     }
 
-    public void receberMensagem(String mensagem) {
-        mensagens.add(mensagem);
+    public void receberMensagem(String remetente, String mensagem) {
+        mensagens.add(new Mensagem(remetente, mensagem));
+    }
+
+    public void removerMensagensEnviadasPor(String login) {
+        List<Mensagem> mensagensRemovidas = new ArrayList<>();
+
+        for (Mensagem mensagem : mensagens) {
+            if (login.equals(mensagem.getRemetente())) {
+                mensagensRemovidas.add(mensagem);
+            }
+        }
+
+        mensagens.removeAll(mensagensRemovidas);
     }
 
     public String lerMensagemMaisAntiga() throws NaoHaMensagensException {
@@ -312,7 +355,7 @@ public class Usuario {
             throw new NaoHaMensagensException();
         }
 
-        return mensagens.remove(0);
+        return mensagens.remove(0).getTexto();
     }
 
     public void receberRecadoDoSistema(String mensagem) {

@@ -37,9 +37,10 @@ public class MensagemService {
 
         comunidadeRepository.buscarComunidade(comunidade);
 
+        String remetente = sessao.getUsuario().getLogin();
         for (String login : participacaoComunidadeRepository.listarMembros(comunidade)) {
             Usuario membro = usuarioRepository.buscarUsuario(login);
-            membro.receberMensagem(mensagem);
+            membro.receberMensagem(remetente, mensagem);
         }
     }
 
