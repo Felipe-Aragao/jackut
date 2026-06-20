@@ -11,9 +11,7 @@ public class PaqueraStrategy extends AbstractRelacionamentoStrategy {
     public void adicionar(Usuario origem, Usuario alvo)
             throws FuncaoInvalidaUsuarioInimigoException, UsuarioJaEstaAdicionadoComoPaqueraException,
             UsuarioNaoPodeSerPaqueraDeSiMesmoException {
-        if (origem.getLogin().equals(alvo.getLogin())) {
-            throw new UsuarioNaoPodeSerPaqueraDeSiMesmoException();
-        }
+        validarAutoRelacionamento(origem, alvo, new UsuarioNaoPodeSerPaqueraDeSiMesmoException());
 
         validarBloqueioPorInimigo(origem, alvo);
 

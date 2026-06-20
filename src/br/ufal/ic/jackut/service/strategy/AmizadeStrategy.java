@@ -12,9 +12,7 @@ public class AmizadeStrategy extends AbstractRelacionamentoStrategy {
     public void adicionar(Usuario origem, Usuario alvo)
             throws FuncaoInvalidaUsuarioInimigoException, UsuarioNaoPodeSeAutoAdicionarException,
             UsuarioJaEstaAdicionadoComoAmigoException, EsperandoAceitacaoDoConviteException {
-        if (origem.getLogin().equals(alvo.getLogin())) {
-            throw new UsuarioNaoPodeSeAutoAdicionarException();
-        }
+        validarAutoRelacionamento(origem, alvo, new UsuarioNaoPodeSeAutoAdicionarException());
 
         validarBloqueioPorInimigo(origem, alvo);
 

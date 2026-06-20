@@ -9,9 +9,7 @@ public class InimigoStrategy extends AbstractRelacionamentoStrategy {
     @Override
     public void adicionar(Usuario origem, Usuario alvo)
             throws UsuarioJaEstaAdicionadoComoInimigoException, UsuarioNaoPodeSerInimigoDeSiMesmoException {
-        if (origem.getLogin().equals(alvo.getLogin())) {
-            throw new UsuarioNaoPodeSerInimigoDeSiMesmoException();
-        }
+        validarAutoRelacionamento(origem, alvo, new UsuarioNaoPodeSerInimigoDeSiMesmoException());
 
         if (origem.temRelacionamento(Usuario.REL_INIMIGOS, alvo.getLogin())) {
             throw new UsuarioJaEstaAdicionadoComoInimigoException();

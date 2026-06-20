@@ -11,9 +11,7 @@ public class IdoloStrategy extends AbstractRelacionamentoStrategy {
     public void adicionar(Usuario origem, Usuario alvo)
             throws FuncaoInvalidaUsuarioInimigoException, UsuarioJaEstaAdicionadoComoIdoloException,
             UsuarioNaoPodeSerFaDeSiMesmoException {
-        if (origem.getLogin().equals(alvo.getLogin())) {
-            throw new UsuarioNaoPodeSerFaDeSiMesmoException();
-        }
+        validarAutoRelacionamento(origem, alvo, new UsuarioNaoPodeSerFaDeSiMesmoException());
 
         validarBloqueioPorInimigo(origem, alvo);
 
