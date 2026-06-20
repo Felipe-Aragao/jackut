@@ -1,6 +1,7 @@
 # Jackut
 
 [Relatório Milestone 1 - PDF](relatorio-milestone1.pdf)
+[Relatório Milestone 2 - PDF](relatorio-milestone2.pdf)
 
 Projeto da disciplina Programação 2 (COMP372) 2026.1 - UFAL desenvolvido em Java.
 
@@ -60,24 +61,24 @@ O ponto de entrada `Main` executa os scripts do EasyAccept, apontando para a `Fa
 
 ### Diagrama
 
-![diagrama](diagrama.png "Diagrama")
+![diagrama](digramas/diagrama.png "Diagrama")
 
 <details>
 <summary><i>Clique aqui para ver imagens aumentadas do diagrama</i></summary>
 
-![diagrama](diagrama_se.png "Diagrama - Canto superior esquerdo")
+![diagrama](digramas/diagrama_se.png "Diagrama - Canto superior esquerdo")
 
 ---
 
-![diagrama](diagrama_mb.png "Diagrama - meio em baixo")
+![diagrama](digramas/diagrama_mb.png "Diagrama - meio em baixo")
 
 ---
 
-![diagrama](diagrama_mc.png "Diagrama - meio em cima")
+![diagrama](digramas/diagrama_mc.png "Diagrama - meio em cima")
 
 ---
 
-![diagrama](diagrama_sd.png "Diagrama - canto superior direito")
+![diagrama](digramas/diagrama_sd.png "Diagrama - canto superior direito")
 
 </details>
 
