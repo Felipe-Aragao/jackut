@@ -47,18 +47,38 @@ public class Usuario {
      */
     public Usuario(){}
 
+    /**
+     * Retorna o login do usuário.
+     *
+     * @return login do usuário
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     * Define o login do usuário.
+     *
+     * @param login login do usuário
+     */
     public void setLogin(String login) {
         this.login = login;
     }
 
+    /**
+     * Retorna a senha do usuário.
+     *
+     * @return senha do usuário
+     */
     public String getSenha() {
         return senha;
     }
 
+    /**
+     * Define a senha do usuário.
+     *
+     * @param senha senha do usuário
+     */
     public void setSenha(String senha) {
         this.senha = senha;
     }
@@ -280,6 +300,11 @@ public class Usuario {
         }
     }
     
+    /**
+     * Remove recados enviados ou recebidos pelo login informado.
+     *
+     * @param login login envolvido nos recados
+     */
     public void removerRecadosEnvolvendo(String login) {
         List<Recado> recadosRemovidos = new ArrayList<>();
 
@@ -322,10 +347,20 @@ public class Usuario {
         return recados.remove(0).getMensagem();
     }
 
+    /**
+     * Retorna uma cópia da lista de mensagens do usuário.
+     *
+     * @return lista de mensagens
+     */
     public List<Mensagem> getMensagens() {
         return new ArrayList<>(mensagens);
     }
 
+    /**
+     * Substitui a lista de mensagens do usuário.
+     *
+     * @param mensagens nova lista de mensagens
+     */
     public void setMensagens(List<Mensagem> mensagens) {
         this.mensagens = new ArrayList<>();
 
@@ -334,10 +369,21 @@ public class Usuario {
         }
     }
 
+    /**
+     * Recebe uma mensagem enviada por outro usuário.
+     *
+     * @param remetente login do remetente
+     * @param mensagem texto da mensagem
+     */
     public void receberMensagem(String remetente, String mensagem) {
         mensagens.add(new Mensagem(remetente, mensagem));
     }
 
+    /**
+     * Remove mensagens enviadas pelo login informado.
+     *
+     * @param login login do remetente a remover
+     */
     public void removerMensagensEnviadasPor(String login) {
         List<Mensagem> mensagensRemovidas = new ArrayList<>();
 
@@ -350,6 +396,12 @@ public class Usuario {
         mensagens.removeAll(mensagensRemovidas);
     }
 
+    /**
+     * Retorna e remove a mensagem mais antiga recebida pelo usuário.
+     *
+     * @return texto da mensagem mais antiga
+     * @throws NaoHaMensagensException se nao existirem mensagens
+     */
     public String lerMensagemMaisAntiga() throws NaoHaMensagensException {
         if (mensagens.isEmpty()) {
             throw new NaoHaMensagensException();
@@ -358,6 +410,11 @@ public class Usuario {
         return mensagens.remove(0).getTexto();
     }
 
+    /**
+     * Recebe um recado enviado pelo sistema Jackut.
+     *
+     * @param mensagem texto do recado do sistema
+     */
     public void receberRecadoDoSistema(String mensagem) {
         receberRecado(new Recado("Jackut", login, mensagem));
     }

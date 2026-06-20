@@ -21,18 +21,38 @@ public class Sessao {
         this.usuario = usuario;
     }
 
+    /**
+     * Retorna o identificador da sessão.
+     *
+     * @return identificador da sessão
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Define o identificador da sessão.
+     *
+     * @param id identificador da sessão
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Retorna o usuário associado a sessão.
+     *
+     * @return usuário associado
+     */
     public Usuario getUsuario() {
         return usuario;
     }
 
+    /**
+     * Define o usuário associado a sessão.
+     *
+     * @param usuario usuário associado
+     */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
