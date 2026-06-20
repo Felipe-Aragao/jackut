@@ -3,7 +3,7 @@ package br.ufal.ic.jackut.exception;
 /**
  * Exceção lançada quando já existe convite esperando ser aceito.
  */
-public class EsperandoAceitacaoDoConviteException extends Exception {
+public class EsperandoAceitacaoDoConviteException extends RelacionamentoException {
     /**
      * Cria a exceção com mensagem "Usuário já está adicionado como amigo, esperando aceitação do convite.".
      */
