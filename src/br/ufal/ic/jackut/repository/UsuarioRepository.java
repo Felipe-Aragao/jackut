@@ -39,6 +39,12 @@ public class UsuarioRepository {
         usuarios.put(usuario.getLogin(), usuario);
     }
 
+    /**
+     * Remove o usuário com o login informado.
+     *
+     * @param login login do usuário a remover
+     * @throws UsuarioNaoCadastradoException se não existir usuário com o login
+     */
     public void removerUsuario(String login) throws UsuarioNaoCadastradoException {
         if (!usuarios.containsKey(login)) {
             throw new UsuarioNaoCadastradoException();

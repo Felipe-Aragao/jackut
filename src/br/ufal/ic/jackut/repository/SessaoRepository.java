@@ -40,6 +40,11 @@ public class SessaoRepository {
         return sessoes.get(id);
     }
 
+    /**
+     * Remove todas as sessões associadas ao usuário informado.
+     *
+     * @param login login do usuário
+     */
     public void removerSessoesDoUsuario(String login) {
         List<String> idsRemovidos = new ArrayList<>();
 
