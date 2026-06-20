@@ -60,7 +60,23 @@ O ponto de entrada `Main` executa os scripts do EasyAccept, apontando para a `Fa
 
 ### Diagrama
 
-![diagrama](Diagrama_Milestone1.png "Diagrama")
+![diagrama](diagrama.png "Diagrama")
+
+---
+
+![diagrama](diagrama_se.png "Diagrama - Canto superior esquerdo")
+
+---
+
+![diagrama](diagrama_mb.png "Diagrama - meio em baixo")
+
+---
+
+![diagrama](diagrama_mc.png "Diagrama - meio em cima")
+
+---
+
+![diagrama](diagrama_sd.png "Diagrama - canto superior direito")
 
 ### Main
 
