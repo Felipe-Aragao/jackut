@@ -62,7 +62,8 @@ O ponto de entrada `Main` executa os scripts do EasyAccept, apontando para a `Fa
 
 ![diagrama](diagrama.png "Diagrama")
 
----
+<details>
+<summary><i>Clique aqui para ver imagens aumentadas do diagrama</i></summary>
 
 ![diagrama](diagrama_se.png "Diagrama - Canto superior esquerdo")
 
@@ -77,6 +78,8 @@ O ponto de entrada `Main` executa os scripts do EasyAccept, apontando para a `Fa
 ---
 
 ![diagrama](diagrama_sd.png "Diagrama - canto superior direito")
+
+</details>
 
 ### Main
 
